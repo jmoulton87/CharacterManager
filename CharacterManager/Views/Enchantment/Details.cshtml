@@ -1,0 +1,66 @@
+﻿@model CharacterManager.Models.Enchantment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Enchantment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EnchantmentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnchantmentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnchantmentDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnchantmentDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnchantmentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnchantmentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnchantmentBonus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnchantmentBonus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsEnhancement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsEnhancement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnchantmentValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnchantmentValue)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EnchantmentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

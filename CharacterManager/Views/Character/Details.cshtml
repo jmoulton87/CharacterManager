@@ -1,0 +1,34 @@
+﻿@model CharacterManager.Models.Character
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Character</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Campaign.CampaignName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Campaign.CampaignName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CharacterName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CharacterName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CharacterID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

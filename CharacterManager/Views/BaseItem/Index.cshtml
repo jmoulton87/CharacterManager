@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CharacterManager.Models.BaseItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BaseItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BaseItemType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BaseItemValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BaseItemWeight)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BaseItemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BaseItemType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BaseItemValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BaseItemWeight)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BaseItemID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BaseItemID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BaseItemID })
+        </td>
+    </tr>
+}
+
+</table>

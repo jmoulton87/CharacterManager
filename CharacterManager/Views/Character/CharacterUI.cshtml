@@ -1,0 +1,1037 @@
+﻿@model CharacterManager.Models.Character
+@using CharacterManager.Models
+@using CharacterManager.DAL
+
+
+@{
+    ViewBag.Title = Model.CharacterName;
+    UnitOfWork unitOfWork = new UnitOfWork();
+    var campaignID = Model.Campaign.CampaignID;
+    var gm = unitOfWork.CharacterRepository.Get().Where(x => x.CampaignID == campaignID).OrderBy(x => x.CharacterID).First();
+    //var gmID = unitOfWork.CharacterRepository.Get().Where(x => x.CampaignID == campaignID).OrderBy(x => x.CharacterID).First().CharacterID;
+    var partyloot = unitOfWork.LocationRepository.Get().Where(x => x.Inventory.Character.CharacterID == gm.CharacterID).Where(y => y.LocationType == (LocationType)3);
+    var characters = unitOfWork.CharacterRepository.Get().Where(x => x.CampaignID == campaignID && x.CharacterID != Model.CharacterID);
+
+    var items = unitOfWork.ItemRepository.Get().Where(x => x.Location.Inventory.CharacterID == Model.CharacterID);
+    var partylootitems = partyloot.First().Items;
+}
+
+<h2>@Model.CharacterName</h2>
+
+<div id="characterID" class="hidden" value="@Model.CharacterID"></div>
+
+
+
+<div>
+    <h4>@Model.Campaign.CampaignName</h4>
+    <hr />
+
+    @*EQUIPMENT*@
+    @foreach (var location in Model.Inventories.First().Locations.Where(x => x.LocationType == (LocationType)0))
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <div class="pull-left">
+                    <h3 class="panel-title">
+                        @location.LocationName
+                    </h3>
+                </div>
+            </div>
+            <div>
+
+                <table id="location_@location.LocationID" class="equipmentSlots">
+                    <tr>
+                        <td>
+                            <div id="cell_1_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>Head</td>
+                        <td>Headband</td>
+                        <td>
+                            <div id="cell_9_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div id="cell_2_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>Head</td>
+                        <td>Headband</td>
+                        <td>
+                            <div id="cell_10_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div id="cell_3_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>Eyes</td>
+                        <td>Hands</td>
+                        <td>
+                            <div id="cell_11_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div id="cell_4_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>Shoulders</td>
+                        <td>Ring</td>
+                        <td>
+                            <div id="cell_12_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div id="cell_5_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>Neck</td>
+                        <td>Ring</td>
+                        <td>
+                            <div id="cell_13_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div id="cell_6_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>Chest</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div id="cell_7_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>Body</td>
+                        <td>Primary</td>
+                        <td>
+                            <div id="cell_14_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div id="cell_8_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>Armor</td>
+                        <td>Secondary</td>
+                        <td>
+                            <div id="cell_15_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+    }
+
+    @*INVENTORY*@
+    @foreach (var location in Model.Inventories.First().Locations.Where(x => x.LocationType == (LocationType)1))
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <div class="pull-left">
+                    <h3 class="panel-title">
+                        @location.LocationName
+                    </h3>
+                </div>
+            </div>
+            <div>
+                <table id="location_@location.LocationID">
+                    <tr>
+                        <td>
+                            <div id="cell_1_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_2_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_3_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_4_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_5_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_6_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_7_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_8_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_9_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_10_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="cell_11_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_12_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_13_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_14_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_15_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_16_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_17_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_18_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_19_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_20_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="cell_21_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_22_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_23_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_24_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_25_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_26_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_27_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_28_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_29_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_30_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    }
+
+    @*CONTAINER*@
+    @foreach (var location in Model.Inventories.First().Locations.Where(x => x.LocationType == (LocationType)4 || x.LocationType == (LocationType)5))
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <div class="pull-left">
+                    <h3 class="panel-title">
+                        @location.LocationName
+                    </h3>
+                </div>
+            </div>
+            <div>
+
+                <table id="location_@location.LocationID">
+                    <tr>
+                        <td>
+                            <div id="cell_1_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_2_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_3_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_4_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_5_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_6_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_7_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_8_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_9_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_10_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="cell_11_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_12_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_13_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_14_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_15_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_16_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_17_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_18_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_19_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_20_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="cell_21_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_22_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_23_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_24_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_25_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_26_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_27_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_28_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_29_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="cell_30_@location.LocationID" class="inventoryCell">
+
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+    }
+
+
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Party Loot</a></li>
+            <li><a href="#tabs-2">Trade</a></li>
+        </ul>
+        <div id="tabs-1">
+            @foreach (var location in partyloot)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading clearfix">
+                        <div class="pull-left">
+                            <h3 class="panel-title">
+                                @location.LocationName
+                            </h3>
+                        </div>
+                    </div>
+                    <div>
+
+                        <table id="location_@location.LocationID">
+                            <tr>
+                                <td>
+                                    <div id="cell_1_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_2_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_3_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_4_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_5_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_6_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_7_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_8_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_9_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_10_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id="cell_11_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_12_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_13_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_14_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_15_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_16_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_17_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_18_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_19_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_20_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id="cell_21_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_22_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_23_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_24_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_25_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_26_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_27_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_28_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_29_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="cell_30_@location.LocationID" class="inventoryCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="tabs-2">
+
+            @foreach (var location in Model.Inventories.First().Locations.Where(x => x.LocationType == (LocationType)2))
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading clearfix">
+                        <div class="pull-left">
+                            <h3 class="panel-title">
+                                @location.LocationName
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <table id="location_@location.LocationID">
+                                <tr>
+                                    <td>
+                                        <div id="cell_1_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_2_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_3_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_4_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_5_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_6_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_7_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_8_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_9_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_10_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="cell_11_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_12_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_13_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_14_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_15_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_16_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_17_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_18_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_19_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_20_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="cell_21_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_22_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_23_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_24_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_25_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_26_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_27_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_28_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_29_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="cell_30_@location.LocationID" class="inventoryCell tradeCell">
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="pull-left">
+                            <select id="tradeSelect">
+                                @foreach (var character in characters)
+                                {
+                                    <option value="@character.Inventories.First().Locations.Where(x => x.LocationType == (LocationType)2).First().LocationID">@character.CharacterName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="pull-left">
+                            <div id="trade" class="btn btn-default btn-xs">
+                                Trade >>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div>
+        @foreach (var item in items)
+        {
+            <div id="@item.ItemID @item.Slot @item.Location.LocationID" class="item">
+                <img class="itemIcon" src="~/Content/Icons/@item.BaseItem.BaseItemType icon.png" alt="@item.BaseItem.BaseItemType" height="40" width="40" />
+            </div>
+        }
+        @foreach (var item in partylootitems)
+        {
+            <div id="@item.ItemID @item.Slot @item.Location.LocationID" class="item">
+                <img class="itemIcon" src="~/Content/Icons/@item.BaseItem.BaseItemType icon.png" alt="@item.BaseItem.BaseItemType" height="40" width="40" />
+            </div>
+
+        }
+        @*<div class="item empty"><img class="itemIcon" src="~/Content/Icons/empty.png" alt="Empty" height="40" width="40" /></div>*@
+
+    </div>
+
+    <div id="itemCards" class="hidden">
+        @foreach (var item in items)
+        {
+            <div id="@item.ItemID" class="itemCard">
+                <table>
+                    <tr>
+                        <th>
+                            Name:
+                        </th>
+                        <td>
+                            @item.ItemName
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Type:
+                        </th>
+                        <td>
+                            @item.BaseItem.BaseItemType
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Value:
+                        </th>
+                        <td>
+                            @item.ItemValue
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Quantity:
+                        </th>
+                        <td>
+                            @item.Quantity
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            Weight:
+                        </th>
+                        <td>
+                            @{
+                                var combinedWeight = item.BaseItem.BaseItemWeight * item.Quantity;
+                            }
+                            @combinedWeight (@item.BaseItem.BaseItemWeight)
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        }
+        @foreach (var item in partylootitems)
+        {
+            <div id="@item.ItemID" class="itemCard">
+                <table>
+                    <tr>
+                        <th>
+                            Name:
+                        </th>
+                        <td>
+                            @item.ItemName
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Type:
+                        </th>
+                        <td>
+                            @item.BaseItem.BaseItemType
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Value:
+                        </th>
+                        <td>
+                            @item.ItemValue
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Quantity:
+                        </th>
+                        <td>
+                            @item.Quantity
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            Weight:
+                        </th>
+                        <td>
+                            @{
+                                var combinedWeight = item.BaseItem.BaseItemWeight * item.Quantity;
+                            }
+                            @combinedWeight (@item.BaseItem.BaseItemWeight)
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        }
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CharacterID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/CharacterUI.js")
+}

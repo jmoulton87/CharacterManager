@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CharacterManager.Models.Character>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Campaign.CampaignName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Campaign.CampaignName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CharacterName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CharacterID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CharacterID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CharacterID })
+        </td>
+    </tr>
+}
+
+</table>

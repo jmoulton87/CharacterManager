@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CharacterManager.Models.ItemEnchantment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Enchantment.EnchantmentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Item.ItemName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enchantment.EnchantmentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Item.ItemName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ItemEnchantmentID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ItemEnchantmentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ItemEnchantmentID })
+        </td>
+    </tr>
+}
+
+</table>

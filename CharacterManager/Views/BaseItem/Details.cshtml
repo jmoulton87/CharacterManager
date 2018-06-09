@@ -1,0 +1,50 @@
+﻿@model CharacterManager.Models.BaseItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BaseItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaseItemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseItemType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaseItemType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseItemValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaseItemValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseItemWeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaseItemWeight)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BaseItemID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

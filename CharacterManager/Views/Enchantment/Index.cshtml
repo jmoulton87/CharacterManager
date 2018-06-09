@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CharacterManager.Models.Enchantment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EnchantmentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnchantmentDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnchantmentType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnchantmentBonus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsEnhancement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnchantmentValue)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnchantmentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnchantmentDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnchantmentType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnchantmentBonus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsEnhancement)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnchantmentValue)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EnchantmentID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EnchantmentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EnchantmentID })
+        </td>
+    </tr>
+}
+
+</table>
