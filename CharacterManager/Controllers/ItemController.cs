@@ -23,34 +23,36 @@ namespace CharacterManager.Controllers
             unitOfWork.Save();
         }
 
-        public void TradeItem(int ItemID, int LocationID)
-        {
-            var destination = unitOfWork.LocationRepository.GetByID(LocationID);
-            var items = unitOfWork.ItemRepository.Get().Where(x => x.LocationID == destination.LocationID).OrderBy(x => x.Slot);
-            List<int> SlotList = new List<int>();
-            foreach (var item in items)
-            {
-                SlotList.Add(item.Slot);
-            }
-            int destinationSlot = 0;
-            for (int i = 1; i < SlotList.Count; i++)
-            {
-                //if there are no items in destination
-                //or if an open slot is found
-                if (SlotList.Count == 0 || i != SlotList[i])
-                {
-                    destinationSlot = i;
-                } else
-                //grab the next open slot
-                {
-                    destinationSlot = i + 1;
-                }
-                break;
-            }
-            unitOfWork.ItemRepository.GetByID(ItemID).LocationID = LocationID;
-            unitOfWork.Save();
-            unitOfWork.ItemRepository.GetByID(ItemID).Slot = destinationSlot;
-        }
+        //public void TradeItem(int ItemID, int LocationID)
+        //{
+        //    var destination = unitOfWork.LocationRepository.GetByID(LocationID);
+        //    var items = unitOfWork.ItemRepository.Get().Where(x => x.LocationID == destination.LocationID).OrderBy(x => x.Slot);
+        //    List<int> SlotList = new List<int>();
+        //    foreach (var item in items)
+        //    {
+        //        SlotList.Add(item.Slot);
+        //    }
+        //    int destinationSlot = 0;
+        //    ///FIX THIS UNREACHABLE CODE
+        //    for (int i = 1; i < SlotList.Count; i++)
+        //    {
+        //        //if there are no items in destination
+        //        //or if an open slot is found
+        //        if (SlotList.Count == 0 || i != SlotList[i])
+        //        {
+        //            destinationSlot = i;
+        //            break;
+        //        } else
+        //        //grab the next open slot
+        //        {
+        //            destinationSlot = i + 1;
+        //            break;
+        //        }   
+        //    }
+        //    unitOfWork.ItemRepository.GetByID(ItemID).LocationID = LocationID;
+        //    unitOfWork.Save();
+        //    unitOfWork.ItemRepository.GetByID(ItemID).Slot = destinationSlot;
+        //}
 
         // GET: Item
         public ActionResult Index()

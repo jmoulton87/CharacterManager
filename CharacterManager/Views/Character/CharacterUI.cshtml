@@ -11,6 +11,10 @@
     var partyloot = unitOfWork.LocationRepository.Get().Where(x => x.Inventory.Character.CharacterID == gm.CharacterID).Where(y => y.LocationType == (LocationType)3);
     var characters = unitOfWork.CharacterRepository.Get().Where(x => x.CampaignID == campaignID && x.CharacterID != Model.CharacterID);
 
+    var inventoryID = Model.Inventories.First().InventoryID;
+    var locations = unitOfWork.LocationRepository.Get().Where(x => x.InventoryID == inventoryID);
+    var inventory = locations.Where(x => x.LocationType == (LocationType)1).First();
+
     var items = unitOfWork.ItemRepository.Get().Where(x => x.Location.Inventory.CharacterID == Model.CharacterID);
     var partylootitems = partyloot.First().Items;
 }
@@ -19,8 +23,16 @@
 
 <div id="characterID" class="hidden" value="@Model.CharacterID"></div>
 
+
+
+
+
+
+
+
 <h1>Test Inventory</h1>
-<div id="myInventory" class="inventory-table" locationid="5">
+
+<div id="InventoryGrid" class="inventory-table" locationid="@inventory.LocationID">
 
 </div>
 
@@ -28,7 +40,9 @@
 <div id="itemSpawn">
     @foreach(var item in items)
     {
-    <div class="inventory-item" thisitemid="@item.ItemID" slotid="@item.Slot" locationid="@item.LocationID"></div>
+    <div class="inventory-item @item.BaseItem.Icon.IconSheet @item.BaseItem.Icon.IconPosition" thisitemid="@item.ItemID" slotid="@item.Slot" locationid="@item.LocationID">
+        <b class="item-quantity">@item.Quantity</b>
+    </div>
     }
 </div>
 

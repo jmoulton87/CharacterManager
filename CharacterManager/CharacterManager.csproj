@@ -197,6 +197,7 @@
     <Compile Include="Controllers\CharacterController.cs" />
     <Compile Include="Controllers\EnchantmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IconController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ItemEnchantmentController.cs" />
@@ -376,21 +377,6 @@
     <Content Include="Views\Inventory\Details.cshtml" />
     <Content Include="Views\Inventory\Edit.cshtml" />
     <Content Include="Views\Inventory\Index.cshtml" />
-    <Content Include="Views\ItemEnchantment\Create.cshtml" />
-    <Content Include="Views\ItemEnchantment\Delete.cshtml" />
-    <Content Include="Views\ItemEnchantment\Details.cshtml" />
-    <Content Include="Views\ItemEnchantment\Edit.cshtml" />
-    <Content Include="Views\ItemEnchantment\Index.cshtml" />
-    <Content Include="Views\Enchantment\Create.cshtml" />
-    <Content Include="Views\Enchantment\Delete.cshtml" />
-    <Content Include="Views\Enchantment\Details.cshtml" />
-    <Content Include="Views\Enchantment\Edit.cshtml" />
-    <Content Include="Views\Enchantment\Index.cshtml" />
-    <Content Include="Views\Location\Create.cshtml" />
-    <Content Include="Views\Location\Delete.cshtml" />
-    <Content Include="Views\Location\Details.cshtml" />
-    <Content Include="Views\Location\Edit.cshtml" />
-    <Content Include="Views\Location\Index.cshtml" />
     <Content Include="Views\Item\Create.cshtml" />
     <Content Include="Views\Item\Delete.cshtml" />
     <Content Include="Views\Item\Details.cshtml" />
@@ -402,6 +388,11 @@
     <Content Include="Views\BaseItem\Edit.cshtml" />
     <Content Include="Views\BaseItem\Index.cshtml" />
     <Content Include="Views\Character\CharacterUI.cshtml" />
+    <Content Include="Views\Icon\Create.cshtml" />
+    <Content Include="Views\Icon\Delete.cshtml" />
+    <Content Include="Views\Icon\Details.cshtml" />
+    <Content Include="Views\Icon\Edit.cshtml" />
+    <Content Include="Views\Icon\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

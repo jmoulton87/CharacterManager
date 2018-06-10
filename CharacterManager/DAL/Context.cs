@@ -22,6 +22,7 @@ namespace CharacterManager.DAL
         public DbSet<BaseItem> BaseItems { get; set; }
         public DbSet<ItemEnchantment> ItemEnchanments { get; set; }
         public DbSet<Enchantment> Enchantments { get; set; }
+        public DbSet<Icon> Icons { get; set; }
 
         //NEW MODELS END HERE
 

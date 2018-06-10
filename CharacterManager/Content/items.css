@@ -1,7 +1,4 @@
-﻿.inventory-table {
-}
-
-.inventory-row {
+﻿.inventory-row {
     display: flex;
     flex-direction: row;
     justify-content: flex-start; /* align items in Main Axis */
@@ -23,40 +20,302 @@
     /*background-position: -229px -331px;*/
 }
 
-.inventory-item01 {
+.inventory-item {
     width: 40px;
     height: 40px;
+    position: relative;
     background-repeat: no-repeat;
-    /*-webkit-transition: opacity 0.3s ease;*/
-    /*transition: opacity 0.3s ease;*/
+    background-image: url('/Content/IconSheets/items01.png');
 }
 
-    .inventory-item01.item0001 {
-        background-image: url('/Content/IconSheets/items01.png');
-        background-position: 0px 0px;
-    }
+.item-quantity {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
 
-    .inventory-item01.item0002 {
-        background-image: url('/Content/IconSheets/items01.png');
-        background-position: -0px -40px;
-    }
 
-    .inventory-item01.item0003 {
-        background-image: url('/Content/IconSheets/items01.png');
-        background-position: -0px -80px;
-    }
 
-    .inventory-item01.item0004 {
-        background-image: url('/Content/IconSheets/items01.png');
-        background-position: -0px -120px;
-    }
+.inventory-item.icon-sheet01 {
+    background-image: url('/Content/IconSheets/items01.png');
+}
 
-    .inventory-item01.item0005 {
-        background-image: url('/Content/IconSheets/items01.png');
-        background-position: -0px -160px;
-    }
+.inventory-item.icon-sheet02 {
+    background-image: url('/Content/IconSheets/items02.png');
+}
 
-    .inventory-item01.item0006 {
-        background-image: url('/Content/IconSheets/items01.png');
-        background-position: -0px -200px;
-    }
+.inventory-item.icon-sheet03 {
+    background-image: url('/Content/IconSheets/items03.png');
+}
+
+.inventory-item.icon-sheet04 {
+    background-image: url('/Content/IconSheets/items04.png');
+}
+
+.inventory-item.icon-sheet05 {
+    background-image: url('/Content/IconSheets/items05.png');
+}
+
+.inventory-item.icon-sheet06 {
+    background-image: url('/Content/IconSheets/items06.png');
+}
+
+.inventory-item.icon-sheet07 {
+    background-image: url('/Content/IconSheets/items07.png');
+}
+
+.inventory-item.icon-sheet08 {
+    background-image: url('/Content/IconSheets/items08.png');
+}
+
+.inventory-item.icon-sheet09 {
+    background-image: url('/Content/IconSheets/items09.png');
+}
+
+.inventory-item.icon-sheet10 {
+    background-image: url('/Content/IconSheets/items10.png');
+}
+
+.inventory-item.icon-sheet11 {
+    background-image: url('/Content/IconSheets/items11.png');
+}
+
+.inventory-item.icon-sheet12 {
+    background-image: url('/Content/IconSheets/items12.png');
+}
+
+.inventory-item.icon-sheet13 {
+    background-image: url('/Content/IconSheets/items13.png');
+}
+
+.inventory-item.icon-sheet14 {
+    background-image: url('/Content/IconSheets/items14.png');
+}
+
+.inventory-item.icon-sheet15 {
+    background-image: url('/Content/IconSheets/items15.png');
+}
+
+.inventory-item.icon-sheet16 {
+    background-image: url('/Content/IconSheets/items16.png');
+}
+
+.inventory-item.icon-sheet17 {
+    background-image: url('/Content/IconSheets/items17.png');
+}
+
+.inventory-item.icon-sheet18 {
+    background-image: url('/Content/IconSheets/items18.png');
+}
+
+.inventory-item.icon-sheet19 {
+    background-image: url('/Content/IconSheets/items19.png');
+}
+
+.inventory-item.icon-sheet20 {
+    background-image: url('/Content/IconSheets/items20.png');
+}
+
+.inventory-item.icon-sheet21 {
+    background-image: url('/Content/IconSheets/items21.png');
+}
+
+.inventory-item.icon-sheet22 {
+    background-image: url('/Content/IconSheets/items22.png');
+}
+
+.inventory-item.icon-sheet23 {
+    background-image: url('/Content/IconSheets/items23.png');
+}
+
+.inventory-item.icon-sheet24 {
+    background-image: url('/Content/IconSheets/items24.png');
+}
+
+.inventory-item.icon-sheet25 {
+    background-image: url('/Content/IconSheets/items25.png');
+}
+
+.inventory-item.icon-sheet26 {
+    background-image: url('/Content/IconSheets/items26.png');
+}
+
+.inventory-item.icon-sheet27 {
+    background-image: url('/Content/IconSheets/items27.png');
+}
+
+.inventory-item.icon-sheet28 {
+    background-image: url('/Content/IconSheets/items28.png');
+}
+
+.inventory-item.icon-sheet29 {
+    background-image: url('/Content/IconSheets/items29.png');
+}
+
+.inventory-item.icon-sheet30 {
+    background-image: url('/Content/IconSheets/items30.png');
+}
+
+.inventory-item.icon-sheet31 {
+    background-image: url('/Content/IconSheets/items31.png');
+}
+
+.inventory-item.icon-sheet32 {
+    background-image: url('/Content/IconSheets/items32.png');
+}
+
+.inventory-item.icon-sheet33 {
+    background-image: url('/Content/IconSheets/items33.png');
+}
+
+.inventory-item.icon-sheet34 {
+    background-image: url('/Content/IconSheets/items34.png');
+}
+
+
+
+.position01 {
+    background-position: 0 0;
+}
+
+.position02 {
+    background-position: 0 -40px;
+}
+
+.position03 {
+    background-position: 0 -80px;
+}
+
+.position04 {
+    background-position: 0 -120px;
+}
+
+.position05 {
+    background-position: 0 -160px;
+}
+
+.position06 {
+    background-position: 0 -200px;
+}
+
+.position07 {
+    background-position: -40px 0;
+}
+
+.position08 {
+    background-position: -40px -40px;
+}
+
+.position09 {
+    background-position: -40px -80px;
+}
+
+.position10 {
+    background-position: -40px -120px;
+}
+
+.position11 {
+    background-position: -40px -160px;
+}
+
+.position12 {
+    background-position: -40px -200px;
+}
+
+.position13 {
+    background-position: -80px 0;
+}
+
+.position14 {
+    background-position: -80px -40px;
+}
+
+.position15 {
+    background-position: -80px -80px;
+}
+
+.position16 {
+    background-position: -80px -120px;
+}
+
+.position17 {
+    background-position: -80px -160px;
+}
+
+.position18 {
+    background-position: -80px -200px;
+}
+
+.position19 {
+    background-position: -120px 0;
+}
+
+.position20 {
+    background-position: -120px -40px;
+}
+
+.position21 {
+    background-position: -120px -80px;
+}
+
+.position22 {
+    background-position: -120px -120px;
+}
+
+.position23 {
+    background-position: -120px -160px;
+}
+
+.position24 {
+    background-position: -120px -200px;
+}
+
+.position25 {
+    background-position: -160px 0;
+}
+
+.position26 {
+    background-position: -160px -40px;
+}
+
+.position27 {
+    background-position: -160px -80px;
+}
+
+.position28 {
+    background-position: -160px -120px;
+}
+
+.position29 {
+    background-position: -160px -160px;
+}
+
+.position30 {
+    background-position: -160px -200px;
+}
+
+.position31 {
+    background-position: -200px 0;
+}
+
+.position32 {
+    background-position: -200px -40px;
+}
+
+.position33 {
+    background-position: -200px -80px;
+}
+
+.position34 {
+    background-position: -200px -120px;
+}
+
+.position35 {
+    background-position: -200px -160px;
+}
+
+.position36 {
+    background-position: -200px -200px;
+}
