@@ -36,6 +36,19 @@
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
+.equipment-label1 {
+    margin-left: 5px;
+    width: 80px;
+    height: 40px;
+}
+
+.equipment-label2 {
+    margin-right: 5px;
+    text-align: right;
+    width: 80px;
+    height: 40px;
+}
+
 
 
 .inventory-item.icon-sheet01 {

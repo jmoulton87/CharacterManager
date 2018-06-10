@@ -13,6 +13,7 @@
 
     var inventoryID = Model.Inventories.First().InventoryID;
     var locations = unitOfWork.LocationRepository.Get().Where(x => x.InventoryID == inventoryID);
+    var equipment = locations.Where(x => x.LocationType == (LocationType)0).First();
     var inventory = locations.Where(x => x.LocationType == (LocationType)1).First();
 
     var items = unitOfWork.ItemRepository.Get().Where(x => x.Location.Inventory.CharacterID == Model.CharacterID);
@@ -25,19 +26,81 @@
 
 
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+
+            <h2>@equipment.LocationName</h2>
+            <div id="EquipmentGrid" class="inventory-table" locationid="@equipment.LocationID">
+                <div class="inventory-row">
+                    <div class="inventory-cell" cellid="1" locationid="@equipment.LocationID"></div>
+                    <div class="equipment-label1">Head</div>
+                    <div class="equipment-label2">Belt</div>
+                    <div class="inventory-cell" cellid="9" locationid="@equipment.LocationID"></div>
+                </div>
+                <div class="inventory-row">
+                    <div class="inventory-cell" cellid="2" locationid="@equipment.LocationID"></div>
+                    <div class="equipment-label1">Headband</div>
+                    <div class="equipment-label2">Wrists</div>
+                    <div class="inventory-cell" cellid="10" locationid="@equipment.LocationID"></div>
+                </div>
+                <div class="inventory-row">
+                    <div class="inventory-cell" cellid="3" locationid="@equipment.LocationID"></div>
+                    <div class="equipment-label1">Eyes</div>
+                    <div class="equipment-label2">Hands</div>
+                    <div class="inventory-cell" cellid="11" locationid="@equipment.LocationID"></div>
+                </div>
+                <div class="inventory-row">
+                    <div class="inventory-cell" cellid="4" locationid="@equipment.LocationID"></div>
+                    <div class="equipment-label1">Shoulders</div>
+                    <div class="equipment-label2">Ring</div>
+                    <div class="inventory-cell" cellid="12" locationid="@equipment.LocationID"></div>
+                </div>
+                <div class="inventory-row">
+                    <div class="inventory-cell" cellid="5" locationid="@equipment.LocationID"></div>
+                    <div class="equipment-label1">Neck</div>
+                    <div class="equipment-label2">Ring</div>
+                    <div class="inventory-cell" cellid="13" locationid="@equipment.LocationID"></div>
+                </div>
+                <div class="inventory-row">
+                    <div class="inventory-cell" cellid="6" locationid="@equipment.LocationID"></div>
+                    <div class="equipment-label1">Chest</div>
+                </div>
+                <div class="inventory-row">
+                    <div class="inventory-cell" cellid="7" locationid="@equipment.LocationID"></div>
+                    <div class="equipment-label1">Body</div>
+                    <div class="equipment-label2">Primary</div>
+                    <div class="inventory-cell" cellid="14" locationid="@equipment.LocationID"></div>
+                </div>
+                <div class="inventory-row">
+                    <div class="inventory-cell" cellid="8" locationid="@equipment.LocationID"></div>
+                    <div class="equipment-label1">Armor</div>
+                    <div class="equipment-label2">Secondary</div>
+                    <div class="inventory-cell" cellid="15" locationid="@equipment.LocationID"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+
+            <h2>@inventory.LocationName</h2>
+            <div id="InventoryGrid" class="inventory-table" locationid="@inventory.LocationID">
+
+            </div>
 
 
+        </div>
 
-
-
-<h1>Test Inventory</h1>
-
-<div id="InventoryGrid" class="inventory-table" locationid="@inventory.LocationID">
-
+    </div>
 </div>
 
 
-<div id="itemSpawn">
+
+
+
+
+
+<div id="itemSpawn" class="hidden">
     @foreach(var item in items)
     {
     <div class="inventory-item @item.BaseItem.Icon.IconSheet @item.BaseItem.Icon.IconPosition" thisitemid="@item.ItemID" slotid="@item.Slot" locationid="@item.LocationID">
@@ -46,11 +109,18 @@
     }
 </div>
 
+<div id="itemCards" class="hidden">
+    @foreach(var item in items)
+    {
 
-<p>
+    }
+</div>
+
+
+@*<p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.CharacterID }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@
 
 @section Scripts {
     @Scripts.Render("~/Scripts/CharacterUI.js")

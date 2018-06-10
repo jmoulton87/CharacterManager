@@ -15,12 +15,27 @@ namespace CharacterManager.Controllers
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
 
-        public void MoveItem(int ItemID, int Slot, int LocationID)
+        public void MoveItem(int pickitemid, int picklocationid, int pickslotid, int? dropitemid, int droplocationid, int dropslotid)
         {
-            unitOfWork.ItemRepository.GetByID(ItemID).Slot = Slot;
-            unitOfWork.Save();
-            unitOfWork.ItemRepository.GetByID(ItemID).LocationID = LocationID;
-            unitOfWork.Save();
+            if(dropitemid != null)
+            {
+                unitOfWork.ItemRepository.GetByID(pickitemid).Slot = dropslotid;
+                unitOfWork.Save();
+                unitOfWork.ItemRepository.GetByID(pickitemid).LocationID = droplocationid;
+                unitOfWork.Save();
+
+                unitOfWork.ItemRepository.GetByID(dropitemid).Slot = pickslotid;
+                unitOfWork.Save();
+                unitOfWork.ItemRepository.GetByID(dropitemid).LocationID = picklocationid;
+                unitOfWork.Save();
+            }
+            else
+            {
+                unitOfWork.ItemRepository.GetByID(pickitemid).Slot = dropslotid;
+                unitOfWork.Save();
+                unitOfWork.ItemRepository.GetByID(pickitemid).LocationID = droplocationid;
+                unitOfWork.Save();
+            }
         }
 
         //public void TradeItem(int ItemID, int LocationID)
