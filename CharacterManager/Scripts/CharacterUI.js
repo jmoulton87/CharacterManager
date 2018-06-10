@@ -137,4 +137,26 @@ $(".item").hover(function () {
     //console.log($(this))
     $("#" + HoverID).detach().appendTo("#itemCards");
 
+    });
+
+
+function drawTable(targetID, x, y) {
+    //for each row
+    var TargetTable = $('#' + targetID)
+    var CellID = 1;
+    for (i = 0; i < y; i++) {
+        console.log("for loop through rows: " + i);
+        TargetTable.append('<div class="inventory-row"><div>');
+        var ThisRow = TargetTable.children().last();
+        for (j = 0; j < x; j++) {
+            console.log("for loop through columns: " + j);
+            ThisRow.append('<div class="inventory-cell" CellID="' + CellID + '"></div>');
+            CellID++;
+        }
+    }
+};
+
+$('document').ready(function () {
+    console.log("document ready, doing a thing");
+    drawTable('myInventory', 10, 5);
 });

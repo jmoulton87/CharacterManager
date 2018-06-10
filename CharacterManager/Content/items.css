@@ -1,0 +1,62 @@
+﻿.inventory-table {
+}
+
+.inventory-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; /* align items in Main Axis */
+    align-items: flex-start; /* align items in Cross Axis */
+    align-content: flex-start; /* Extra space in Cross Axis */
+}
+
+.inventory-cell {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* align items in Main Axis */
+    align-items: center; /* align items in Cross Axis */
+    align-content: center; /* Extra space in Cross Axis */
+    background-image: url(/Content/Inventory/inventorycell.png)
+    /*background-image: url('http://i.imgur.com/nOqKSbE.png');*/
+    /*background-position: -229px -331px;*/
+}
+
+.inventory-item01 {
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+    /*-webkit-transition: opacity 0.3s ease;*/
+    /*transition: opacity 0.3s ease;*/
+}
+
+    .inventory-item01.item0001 {
+        background-image: url('/Content/IconSheets/items01.png');
+        background-position: 0px 0px;
+    }
+
+    .inventory-item01.item0002 {
+        background-image: url('/Content/IconSheets/items01.png');
+        background-position: -0px -40px;
+    }
+
+    .inventory-item01.item0003 {
+        background-image: url('/Content/IconSheets/items01.png');
+        background-position: -0px -80px;
+    }
+
+    .inventory-item01.item0004 {
+        background-image: url('/Content/IconSheets/items01.png');
+        background-position: -0px -120px;
+    }
+
+    .inventory-item01.item0005 {
+        background-image: url('/Content/IconSheets/items01.png');
+        background-position: -0px -160px;
+    }
+
+    .inventory-item01.item0006 {
+        background-image: url('/Content/IconSheets/items01.png');
+        background-position: -0px -200px;
+    }
