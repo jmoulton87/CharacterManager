@@ -8,133 +8,147 @@
 //    });
 //});
 
-//this function takes the id of an item
-//it returs the ItemID, SlotID, and LocationID
-function itemValues(valueString) {
-    var values = valueString.split(" ");
-    //console.log(values);
-    return values;
-};
+//$("#trade").on('click', function () {
+//    var destination = $("#tradeSelect option:selected").val();
+//    console.log("destination: " + destination);
+//    $(".tradeCell").each(function () {
+//        if ($(this).children().first().attr('id').indexOf("empty") >= 0) {
+//            console.log("cell was empty");
+//        } else {
+//            var item = $(this).children().first();
+//            var ItemID = itemValues(item.attr('id'))[0]; 
+//            console.log(item);
+//            $(item).detach();
+//            $.ajax({
+//                url: "/Item/TradeItem",
+//                data: { ItemID: ItemID, LocationID: destination },
+//                success: function () {
+//                    console.log("a thing happened");
+//                }
+//            });
+//        }
+//    });
+//});
 
-//this function takes the id of a slot
-//it returs the SlotID, and LocationID
-function cellValues(valueString) {
-    var values = valueString.split("_");
-    //console.log(values);
-    return values;
-};
+//var HoverID;
+//$(".item").hover(function () {
+//    //console.log($(this))
+//    HoverID = itemValues($(this).attr('id'))[0]; 
+//    //console.log(HoverID);
+//    $("#" + HoverID).detach().appendTo($(this));
+//}, function () {
+//    //console.log($(this))
+//    $("#" + HoverID).detach().appendTo("#itemCards");
 
+//    });
 
-$("document").ready(function () {
-    $(".item").each(function () {
-        if ($(this).attr('id') != null) {
-            var valueString = $(this).attr('id')
-            var values = itemValues(valueString);
-            $(this).detach().appendTo('#cell_' + values[1] + "_" + values[2]);
-        }
-    });
-
-    var i=0
-    $(".inventoryCell").each(function () {
-        //console.log("doing a thing");
-        if ($(this).children().length == 0) {
-            $(this).append('<div id=empty_' + i + ' class="item empty"><img class="itemIcon" src="/Content/Icons/empty.png" alt="Empty" height="40" width="40" /></div>');
-        }
-        i++;
-    });
-});
-
-
-var clickItem = false;
-var slot1, slot2, item1, item2;
-$(".inventoryCell").on('click', function () {
-    if (clickItem == false) {
-        clickItem = true;
-        slot1 = $(this);
-        item1 = $(this).children(0);
-        $(slot1).css('border-color', 'Chartreuse');
+var firstclick = false;
+var pickelement, pickitemid, picklocationid, pickslotid, dropelement, dropitemid, droplocationid, dropslotid;
+$(".inventory-table").on("click", ".inventory-cell", function () {
+    //console.log("clicking a cell");
+    //is this first click?
+    if (firstclick === false) {
+        //if the first click is on an item, initate a move
+        if ($(this).children().length > 0) {
+            //get information for the item that was clicked on
+            pickelement = $(this).children(0);
+            pickitemid = pickelement.attr("thisitemid");
+            picklocationid = pickelement.attr("locationid");
+            pickslotid = pickelement.attr("slotid");
+            firstclick = true;
+        } 
     } else {
-        slot2 = $(this);
-        item2 = $(this).children(0);
-        //console.log("doing a thing");
-        //console.log(item1.attr('id'))
-        //console.log(item2.attr('id'))
-        //console.log(slot1.attr('id'))
-        //console.log(slot2.attr('id'))
+        //if the second click is on an item, swap the items
+        if ($(this).children().length > 0) {
+            //get information for the item that was clicked on
+            dropelement = $(this).children(0);
+            dropitemid = dropelement.attr("thisitemid");
+            droplocationid = dropelement.attr("locationid");
+            dropslotid = dropelement.attr("slotid");
+            if (/*move is legal*/ 0 === 0) {
+                $.ajax({
+                    url: "/Item/MoveItem",
+                    data: {
+                        pickitemid: pickitemid,
+                        picklocationid: picklocationid,
+                        pickslotid: pickslotid,
+                        dropitemid: dropitemid,
+                        droplocationid: droplocationid,
+                        dropslotid: dropslotid
+                    },
+                    success: function () {
+                        pickelement.detach().appendTo($('[cellid=' + dropslotid + '][locationid=' + droplocationid + ']'));
+                        dropelement.detach().appendTo($('[cellid=' + pickslotid + '][locationid=' + picklocationid + ']'));
+                    }
+                });
 
-        if (item1 != item2) {
-            $(item1).detach().appendTo(slot2);
-            $(item2).detach().appendTo(slot1);
-            $(slot1).css('border-color', 'black');
-        }
-
-        if (item1.attr('id').indexOf("empty") >= 0) {
-            //console.log("item 1 was empty")
+            }
+        //else if the second click on an empty space, move the item
         } else {
-            var ItemID = itemValues(item1.attr('id'))[0]
-            var newSlot = cellValues(slot2.attr('id'))[1]
-            var newLoc = cellValues(slot2.attr('id'))[2]
-            //console.log(ItemID, newSlot, newLoc);
-            $.ajax({
-                url: "/Item/MoveItem",
-                data: { ItemID: ItemID, Slot: newSlot, LocationID: newLoc },
-                success: function () {
-                    //console.log("a thing happened");
-                }
-            })
+            dropelement = $(this);
+            dropitemid = null;
+            droplocationid = dropelement.attr("locationid");
+            dropslotid = dropelement.attr("cellid");
+            if (/*move is legal*/ 0 === 0) {
+                $.ajax({
+                    url: "/Item/MoveItem",
+                    data: {
+                        pickitemid: pickitemid,
+                        picklocationid: picklocationid,
+                        pickslotid: pickslotid,
+                        dropitemid: dropitemid,
+                        droplocationid: droplocationid,
+                        dropslotid: dropslotid
+                    },
+                    success: function () {
+                        pickelement.detach().appendTo($('[cellid=' + dropslotid + '][locationid=' + droplocationid + ']'));
+                    }
+                });
+            }
         }
-        if (item2.attr('id').indexOf("empty") >= 0) {
-            //console.log("item 2 was empty")
-        } else {
-            var ItemID = itemValues(item1.attr('id'))[0]
-            var newSlot = cellValues(slot2.attr('id'))[1]
-            var newLoc = cellValues(slot2.attr('id'))[2]
-            $.ajax({
-                url: "/Item/MoveItem",
-                data: { ItemID: ItemID, Slot: newSlot, LocationID: newLoc },
-                success: function () {
-                    //console.log("a thing happened");
-                }
-            })
-        }
-        clickItem = false;
-        slot1 = null;
-        slot2 = null;
-        item1 = null;
-        item2 = null;
+        //after moving an item or failing a move, reset the firstclick bool
+        firstclick = false;
     }
-})
-
-$("#trade").on('click', function () {
-    var destination = $("#tradeSelect option:selected").val();
-    console.log("destination: " + destination);
-    $(".tradeCell").each(function () {
-        if ($(this).children().first().attr('id').indexOf("empty") >= 0) {
-            console.log("cell was empty")
-        } else {
-            var item = $(this).children().first();
-            var ItemID = itemValues(item.attr('id'))[0] 
-            console.log(item);
-            $(item).detach()
-            $.ajax({
-                url: "/Item/TradeItem",
-                data: { ItemID: ItemID, LocationID: destination },
-                success: function () {
-                    console.log("a thing happened");
-                }
-            })
-        }
-    });
 });
 
-var HoverID;
-$(".item").hover(function () {
-    //console.log($(this))
-    HoverID = itemValues($(this).attr('id'))[0] 
-    //console.log(HoverID);
-    $("#" + HoverID).detach().appendTo($(this));
-}, function () {
-    //console.log($(this))
-    $("#" + HoverID).detach().appendTo("#itemCards");
 
+
+function drawTable(targetID, x, y) {
+    //for each row
+    var TargetTable = $('#' + targetID);
+    var CellID = 1;
+    var LocationID = $('#' + targetID).attr('locationid');
+    for (i = 0; i < y; i++) {
+        //console.log("for loop through rows: " + i);
+        TargetTable.append('<div class="inventory-row"><div>');
+        var ThisRow = TargetTable.children().last();
+        for (j = 0; j < x; j++) {
+            //console.log("for loop through columns: " + j);
+            ThisRow.append('<div class="inventory-cell" cellid="' + CellID + '" locationid="' + LocationID + '"></div>');
+            CellID++;
+        }
+    }
+}
+
+//draw the gril for the equipment location
+$('document').ready(function () {
+});
+
+
+//draw the grid for the inventory location
+$('document').ready(function () {
+    console.log("document ready, drawing inventory grid");
+    drawTable('InventoryGrid', 4, 8);
+});
+
+//put the items in their place
+$("document").ready(function () {
+    $(".inventory-item").each(function () {
+        //console.log("found item");
+        if ($(this).attr('thisitemid') !== null) {
+            var slotid = $(this).attr('slotid');
+            var locationid = $(this).attr('locationid');
+            $(this).detach().appendTo($('[cellid=' + slotid + '][locationid=' + locationid + ']'));
+        }
+    });
 });

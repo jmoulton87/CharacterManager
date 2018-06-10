@@ -18,6 +18,9 @@ namespace CharacterManager.Models
         [ForeignKey("BaseItem")]
         public int BaseItemID { get; set; }
 
+        //[ForeignKey("Icon")]
+        //public int? IconID { get; set; }
+
         public string ItemName { get; set; }
 
         public int Quantity { get; set; }
@@ -27,7 +30,7 @@ namespace CharacterManager.Models
         public int Slot { get; set; }
 
 
-
+        //public virtual Icon IconOverride { get; set; }
         public virtual Location Location { get; set; }
         public virtual BaseItem BaseItem { get; set; }
         public virtual ICollection<ItemEnchantment> ItemEnchantments { get; set; }

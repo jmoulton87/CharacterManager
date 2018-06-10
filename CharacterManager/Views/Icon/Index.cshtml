@@ -1,0 +1,54 @@
+﻿@model IEnumerable<CharacterManager.Models.Icon>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Icon
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IconName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IconSheet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IconPosition)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <div class="inventory-cell">
+                <div class="@item.IconSheet @item.IconPosition"></div>
+
+            </div>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IconName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IconSheet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IconPosition)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IconID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IconID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IconID })
+        </td>
+    </tr>
+}
+
+</table>

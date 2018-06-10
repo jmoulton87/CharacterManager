@@ -1,0 +1,42 @@
+﻿@model CharacterManager.Models.Icon
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Icon</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IconName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IconName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IconSheet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IconSheet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IconPosition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IconPosition)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IconID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

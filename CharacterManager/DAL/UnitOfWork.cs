@@ -26,6 +26,7 @@ namespace CharacterManager.DAL
         private Repository<BaseItem> baseItemRepository;
         private Repository<ItemEnchantment> itemEnchantmentRepository;
         private Repository<Enchantment> enchantmentRepository;
+        private Repository<Icon> iconRepository;
 
         //NEW MODELS END HERE
         //-------------------------------------------------------------
@@ -145,6 +146,19 @@ namespace CharacterManager.DAL
                 return enchantmentRepository;
             }
         }
+
+        public Repository<Icon> IconRepository
+        {
+            get
+            {
+                if (this.iconRepository == null)
+                {
+                    this.iconRepository = new Repository<Icon>(context);
+                }
+                return iconRepository;
+            }
+        }
+
 
         //NEW MODELS END HERE
         //-------------------------------------------------------------
