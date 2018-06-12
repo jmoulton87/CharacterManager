@@ -10,14 +10,15 @@ namespace CharacterManager.Models
 {
     public enum ItemType
     {
-        Currency,
-        Container,
-        EDimContainer,
-        MeleeWeapon,
-        RangedWeapon,
-        Armor,
-        Shield,
-        Treasure
+        currency,
+        container,
+        containeredim,
+        onehandedweapon,
+        twohandedweapon,
+        rangedweapon,
+        armor,
+        shield,
+        treasure
     }
     public class BaseItem
     {

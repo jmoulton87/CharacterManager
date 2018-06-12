@@ -33,6 +33,11 @@
 
             <div id="EquipmentGrid" class="inventory-table" locationid="@equipment.LocationID">
                 <div class="inventory-row">
+                    <div class="inventory-name">
+                        Equipment
+                    </div>
+                </div>
+                <div class="inventory-row">
                     <div class="inventory-cell" cellid="1" locationid="@equipment.LocationID" item-type="head"></div>
                     <div class="equipment-label1">Head</div>
                     <div class="equipment-label2">Belt</div>
@@ -76,7 +81,7 @@
                     <div class="inventory-cell" cellid="8" locationid="@equipment.LocationID" item-type="armor"></div>
                     <div class="equipment-label1">Armor</div>
                     <div class="equipment-label2">Secondary</div>
-                    <div class="inventory-cell" cellid="15" locationid="@equipment.LocationID" item-type="onehandedweapon ammo"></div>
+                    <div class="inventory-cell" cellid="15" locationid="@equipment.LocationID" item-type="onehandedweapon rangedweapon shield ammo"></div>
                 </div>
             </div>
 
@@ -85,6 +90,12 @@
         <div class="inventory-container pull-left">
 
             <div id="InventoryGrid" class="inventory-table" locationid="@inventory.LocationID">
+                <div class="inventory-row">
+                    <div class="inventory-name">
+                        Inventory
+                    </div>
+                </div>
+
 
             </div>
         </div>
@@ -102,10 +113,10 @@
 
             <div id="bag-location_@bag.LocationID" class="inventory-table inventory-bag" locationid="@bag.LocationID">
                 <div class="inventory-row">
-                    <div class="inventory-cell itemlock">
+                    <div class="inventory-cell itemlock" item-type="all">
                         <div class="inventory-item @unitOfWork.ItemRepository.GetByID(bag.ItemID).BaseItem.Icon.IconSheet @unitOfWork.ItemRepository.GetByID(bag.ItemID).BaseItem.Icon.IconPosition itemlock" ></div>
                     </div>
-                    <div class="bag-name">@bag.LocationName</div>
+                    <div class="inventory-name">@bag.LocationName</div>
                 </div>
 
             </div>
