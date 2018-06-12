@@ -1,4 +1,16 @@
-﻿.inventory-row {
+﻿.inventory-container {
+    border-style: outset;
+    border-color: gray;
+    background-color: #202022;
+    display: inline-block;
+    margin: 10px;
+}
+
+.inventory-table{
+    padding: 10px
+}
+
+.inventory-row {
     display: flex;
     flex-direction: row;
     justify-content: flex-start; /* align items in Main Axis */
@@ -25,7 +37,6 @@
     height: 40px;
     position: relative;
     background-repeat: no-repeat;
-    background-image: url('/Content/IconSheets/items01.png');
 }
 
 .item-quantity {
@@ -40,15 +51,26 @@
     margin-left: 5px;
     width: 80px;
     height: 40px;
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .equipment-label2 {
+    text-align:right;
     margin-right: 5px;
-    text-align: right;
     width: 80px;
     height: 40px;
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
+.bag-name {
+    margin-left: 5px;
+    width: 80px;
+    height: 40px;
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
 
 
 .inventory-item.icon-sheet01 {

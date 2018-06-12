@@ -1269,9 +1269,9 @@ namespace CharacterManager.DAL
             {
                 new Character{ CharacterID = 1, CharacterName = "Game Master", UserID = gamemaster, CampaignID = 1, CarryStrength = 1, CharacterType = (CharacterType)0 },
                 new Character{ CharacterID = 2, CharacterName = "Atlas", UserID = player1, CampaignID = 1, CarryStrength = 18, CharacterType = (CharacterType)1 },
-                //new Character{ CharacterID = 3, CharacterName = "Leala", UserID = player2, CampaignID = 1, CarryStrength = 15, CharacterType = (CharacterType)1 },
-                //new Character{ CharacterID = 4, CharacterName = "Varen", UserID = player2, CampaignID = 1, CarryStrength = 13, CharacterType = (CharacterType)1 },
-                //new Character{ CharacterID = 5, CharacterName = "Garrett", UserID = player4, CampaignID = 1, CarryStrength = 17, CharacterType = (CharacterType)1 }
+                new Character{ CharacterID = 3, CharacterName = "Leala", UserID = player2, CampaignID = 1, CarryStrength = 15, CharacterType = (CharacterType)1 },
+                new Character{ CharacterID = 4, CharacterName = "Varen", UserID = player2, CampaignID = 1, CarryStrength = 13, CharacterType = (CharacterType)1 },
+                new Character{ CharacterID = 5, CharacterName = "Garrett", UserID = player4, CampaignID = 1, CarryStrength = 17, CharacterType = (CharacterType)1 }
 
             };
             characters.ForEach(character => context.Characters.Add(character));
@@ -1283,9 +1283,9 @@ namespace CharacterManager.DAL
             {
                 new Inventory{ InventoryID=1, InventoryName="Dungeon Master's Inventory", CharacterID=1 },
                 new Inventory{ InventoryID=2, InventoryName="Atlas's Inventory", CharacterID=2 },
-                //new Inventory{ InventoryID=3, InventoryName="Leala's Inventory", CharacterID=3 },
-                //new Inventory{ InventoryID=4, InventoryName="Varen's Inventory", CharacterID=4 },
-                //new Inventory{ InventoryID=5, InventoryName="Garrett's Inventory", CharacterID=5 }
+                new Inventory{ InventoryID=3, InventoryName="Leala's Inventory", CharacterID=3 },
+                new Inventory{ InventoryID=4, InventoryName="Varen's Inventory", CharacterID=4 },
+                new Inventory{ InventoryID=5, InventoryName="Garrett's Inventory", CharacterID=5 }
             };
             inventories.ForEach(inventory => context.Inventories.Add(inventory));
             context.SaveChanges();
@@ -1303,21 +1303,21 @@ namespace CharacterManager.DAL
                 new Location{ LocationID = 4, InventoryID = 2, LocationType = (LocationType)0, LocationName = "Equipment" },
                 new Location{ LocationID = 5, InventoryID = 2, LocationType = (LocationType)1, LocationName = "Inventory" },
                 new Location{ LocationID = 6, InventoryID = 2, LocationType = (LocationType)2, LocationName = "Trade" },
-                //new Location{ LocationID = 16, InventoryID = 2, LocationType = (LocationType)4, LocationName = "Backpack", ItemID = 9 },
-                //new Location{ LocationID = 17, InventoryID = 2, LocationType = (LocationType)5, LocationName = "Handy Haversack", ItemID = 14 },
+                new Location{ LocationID = 16, InventoryID = 2, LocationType = (LocationType)4, LocationName = "Backpack", ItemID = 9, IsExtraDim = false },
+                new Location{ LocationID = 17, InventoryID = 2, LocationType = (LocationType)4, LocationName = "Handy Haversack", ItemID = 14, IsExtraDim = true, Capacity = 120 },
 
-                ////player 2 locations
-                //new Location{ LocationID = 7, InventoryID = 3, LocationType = (LocationType)0, LocationName = "Equipment" },
-                //new Location{ LocationID = 8, InventoryID = 3, LocationType = (LocationType)1, LocationName = "Inventory" },
-                //new Location{ LocationID = 9, InventoryID = 3, LocationType = (LocationType)2, LocationName = "Trade" },
-                ////player 3 locations
-                //new Location{ LocationID = 10, InventoryID = 4, LocationType = (LocationType)0, LocationName = "Equipment" },
-                //new Location{ LocationID = 11, InventoryID = 4, LocationType = (LocationType)1, LocationName = "Inventory" },
-                //new Location{ LocationID = 12, InventoryID = 4, LocationType = (LocationType)2, LocationName = "Trade" },
-                ////player 4 locations
-                //new Location{ LocationID = 13, InventoryID = 5, LocationType = (LocationType)0, LocationName = "Equipment" },
-                //new Location{ LocationID = 14, InventoryID = 5, LocationType = (LocationType)1, LocationName = "Inventory" },
-                //new Location{ LocationID = 15, InventoryID = 5, LocationType = (LocationType)2, LocationName = "Trade" },
+                //player 2 locations
+                new Location{ LocationID = 7, InventoryID = 3, LocationType = (LocationType)0, LocationName = "Equipment" },
+                new Location{ LocationID = 8, InventoryID = 3, LocationType = (LocationType)1, LocationName = "Inventory" },
+                new Location{ LocationID = 9, InventoryID = 3, LocationType = (LocationType)2, LocationName = "Trade" },
+                //player 3 locations
+                new Location{ LocationID = 10, InventoryID = 4, LocationType = (LocationType)0, LocationName = "Equipment" },
+                new Location{ LocationID = 11, InventoryID = 4, LocationType = (LocationType)1, LocationName = "Inventory" },
+                new Location{ LocationID = 12, InventoryID = 4, LocationType = (LocationType)2, LocationName = "Trade" },
+                //player 4 locations
+                new Location{ LocationID = 13, InventoryID = 5, LocationType = (LocationType)0, LocationName = "Equipment" },
+                new Location{ LocationID = 14, InventoryID = 5, LocationType = (LocationType)1, LocationName = "Inventory" },
+                new Location{ LocationID = 15, InventoryID = 5, LocationType = (LocationType)2, LocationName = "Trade" },
             };
             locations.ForEach(location => context.Locations.Add(location));
             context.SaveChanges();
@@ -1331,13 +1331,13 @@ namespace CharacterManager.DAL
                 new BaseItem{ BaseItemID = 3, IconID =794, BaseItemName = "Gold Coin", BaseItemType = (ItemType)0, BaseItemValue = 1, BaseItemWeight = 0.02},
                 new BaseItem{ BaseItemID = 4, IconID =793, BaseItemName = "Platinum Coin", BaseItemType = (ItemType)0, BaseItemValue = 10, BaseItemWeight = 0.02},
 
-                //new BaseItem{ BaseItemID = 5, BaseItemName = "Backpack", BaseItemType = (ItemType)1, BaseItemValue = 2, BaseItemWeight = 2 },
-                //new BaseItem{ BaseItemID = 6, BaseItemName = "Handy Haversack", BaseItemType = (ItemType)2, BaseItemValue = 2000, BaseItemWeight = 5, Capacity = 120},
+                new BaseItem{ BaseItemID = 5, IconID = 1074, BaseItemName = "Backpack", BaseItemType = (ItemType)1, BaseItemValue = 2, BaseItemWeight = 2, IsExtraDim = false },
+                new BaseItem{ BaseItemID = 6, IconID = 1105, BaseItemName = "Handy Haversack", BaseItemType = (ItemType)2, BaseItemValue = 2000, BaseItemWeight = 5, IsExtraDim=true, Capacity = 120},
 
-                //new BaseItem{ BaseItemID = 7, BaseItemName = "Longsword", BaseItemType = (ItemType)3, BaseItemValue = 15, BaseItemWeight = 4},
-                //new BaseItem{ BaseItemID = 8, BaseItemName = "Scale Mail", BaseItemType = (ItemType)5, BaseItemValue = 50, BaseItemWeight = 30},
-                //new BaseItem{ BaseItemID = 9, BaseItemName = "Heavy Wooden Shield", BaseItemType = (ItemType)6, BaseItemValue = 7, BaseItemWeight = 10},
-                //new BaseItem{ BaseItemID = 10, BaseItemName = "Ruby", BaseItemType = (ItemType)7, BaseItemValue = 500, BaseItemWeight = 0},
+                new BaseItem{ BaseItemID = 7, IconID =1, BaseItemName = "Longsword", BaseItemType = (ItemType)3, BaseItemValue = 15, BaseItemWeight = 4},
+                new BaseItem{ BaseItemID = 8, IconID =1, BaseItemName = "Scale Mail", BaseItemType = (ItemType)5, BaseItemValue = 50, BaseItemWeight = 30},
+                new BaseItem{ BaseItemID = 9, IconID =1, BaseItemName = "Heavy Wooden Shield", BaseItemType = (ItemType)6, BaseItemValue = 7, BaseItemWeight = 10},
+                new BaseItem{ BaseItemID = 10, IconID =1, BaseItemName = "Ruby", BaseItemType = (ItemType)7, BaseItemValue = 500, BaseItemWeight = 0},
 
 
 
@@ -1349,10 +1349,10 @@ namespace CharacterManager.DAL
 
             var items = new List<Item>
             {
-                //new Item{ ItemID = 1, BaseItemID = 1, LocationID = 3, ItemName = "Copper Coin(s)", Quantity = 100, ItemValue = 0.01, Slot=1},
-                //new Item{ ItemID = 2, BaseItemID = 2, LocationID = 3, ItemName = "Silver Coin(s)", Quantity = 100, ItemValue = 0.1, Slot=3},
-                //new Item{ ItemID = 3, BaseItemID = 3, LocationID = 3, ItemName = "Gold Coin(s)", Quantity = 100, ItemValue = 1, Slot=4},
-                //new Item{ ItemID = 4, BaseItemID = 4, LocationID = 3, ItemName = "Platinum Coin(s)", Quantity = 100, ItemValue = 100, Slot=7},
+                new Item{ ItemID = 1, BaseItemID = 1, LocationID = 3, ItemName = "Copper Coin(s)", Quantity = 100, ItemValue = 0.01, Slot=1},
+                new Item{ ItemID = 2, BaseItemID = 2, LocationID = 3, ItemName = "Silver Coin(s)", Quantity = 100, ItemValue = 0.1, Slot=3},
+                new Item{ ItemID = 3, BaseItemID = 3, LocationID = 3, ItemName = "Gold Coin(s)", Quantity = 100, ItemValue = 1, Slot=4},
+                new Item{ ItemID = 4, BaseItemID = 4, LocationID = 3, ItemName = "Platinum Coin(s)", Quantity = 100, ItemValue = 100, Slot=7},
 
                 new Item{ ItemID = 5, BaseItemID = 1, LocationID = 5, ItemName = "Copper Coin(s)", Quantity = 100, ItemValue = 0.01, Slot=1},
                 new Item{ ItemID = 6, BaseItemID = 2, LocationID = 5, ItemName = "Silver Coin(s)", Quantity = 75, ItemValue = 0.1, Slot=3},
@@ -1360,19 +1360,19 @@ namespace CharacterManager.DAL
                 new Item{ ItemID = 8, BaseItemID = 4, LocationID = 5, ItemName = "Platinum Coin(s)", Quantity = 25, ItemValue = 100, Slot=7},
 
 
-                //new Item{ ItemID = 9, BaseItemID = 5, LocationID = 5, ItemName = "Backpack", Quantity = 1, ItemValue = 2, Slot=2},
+                new Item{ ItemID = 9, BaseItemID = 5, LocationID = 5, ItemName = "Backpack", Quantity = 1, ItemValue = 2, Slot=2},
 
-                //new Item{ ItemID = 10, BaseItemID = 1, LocationID = 16, ItemName = "Copper Coin(s)", Quantity = 25, ItemValue = 0.01, Slot=1},
-                //new Item{ ItemID = 11, BaseItemID = 2, LocationID = 16, ItemName = "Silver Coin(s)", Quantity = 25, ItemValue = 0.1, Slot=2},
-                //new Item{ ItemID = 12, BaseItemID = 3, LocationID = 16, ItemName = "Gold Coin(s)", Quantity = 50, ItemValue = 1, Slot=4},
-                //new Item{ ItemID = 13, BaseItemID = 4, LocationID = 16, ItemName = "Platinum Coin(s)", Quantity = 1000, ItemValue = 100, Slot=6},
+                new Item{ ItemID = 10, BaseItemID = 1, LocationID = 16, ItemName = "Copper Coin(s)", Quantity = 25, ItemValue = 0.01, Slot=1},
+                new Item{ ItemID = 11, BaseItemID = 2, LocationID = 16, ItemName = "Silver Coin(s)", Quantity = 25, ItemValue = 0.1, Slot=2},
+                new Item{ ItemID = 12, BaseItemID = 3, LocationID = 16, ItemName = "Gold Coin(s)", Quantity = 50, ItemValue = 1, Slot=4},
+                new Item{ ItemID = 13, BaseItemID = 4, LocationID = 16, ItemName = "Platinum Coin(s)", Quantity = 1000, ItemValue = 100, Slot=6},
 
-                //new Item{ ItemID = 14, BaseItemID = 6, LocationID = 5, ItemName = "Handy Haversack", Quantity = 1, ItemValue = 2000, Slot = 8},
+                new Item{ ItemID = 14, BaseItemID = 6, LocationID = 5, ItemName = "Handy Haversack", Quantity = 1, ItemValue = 2000, Slot = 8},
 
-                //new Item{ ItemID = 15, BaseItemID = 7, LocationID = 3, ItemName = "Longsword", Quantity = 1, ItemValue = 15, Slot = 10},
-                //new Item{ ItemID = 16, BaseItemID = 8, LocationID = 3, ItemName = "Scale Mail", Quantity = 1, ItemValue = 50, Slot = 11},
-                //new Item{ ItemID = 17, BaseItemID = 9, LocationID = 3, ItemName = "Heavy Wooden Shield", Quantity = 1, ItemValue = 7, Slot = 12},
-                //new Item{ ItemID = 18, BaseItemID = 10, LocationID = 3, ItemName = "Ruby", Quantity = 1, ItemValue = 500, Slot = 13},
+                new Item{ ItemID = 15, BaseItemID = 7, LocationID = 3, ItemName = "Longsword", Quantity = 1, ItemValue = 15, Slot = 10},
+                new Item{ ItemID = 16, BaseItemID = 8, LocationID = 3, ItemName = "Scale Mail", Quantity = 1, ItemValue = 50, Slot = 11},
+                new Item{ ItemID = 17, BaseItemID = 9, LocationID = 3, ItemName = "Heavy Wooden Shield", Quantity = 1, ItemValue = 7, Slot = 12},
+                new Item{ ItemID = 18, BaseItemID = 10, LocationID = 3, ItemName = "Ruby", Quantity = 1, ItemValue = 500, Slot = 13},
 
             };
             items.ForEach(item => context.Items.Add(item));

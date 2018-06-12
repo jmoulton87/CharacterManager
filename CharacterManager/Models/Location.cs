@@ -11,10 +11,9 @@ namespace CharacterManager.Models
     {
         Equipment,
         Inventory,
-        Trade,
-        PartyLoot,
         Container,
-        EDimContainer
+        Trade,
+        PartyLoot
     }
     public class Location
     {
@@ -30,6 +29,10 @@ namespace CharacterManager.Models
 
         //[ForeignKey("Item")]
         public int? ItemID { get; set; }
+
+        public bool? IsExtraDim { get; set; }
+
+        public double? Capacity { get; set; }
 
 
 

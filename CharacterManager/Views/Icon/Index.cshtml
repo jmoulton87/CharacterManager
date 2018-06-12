@@ -15,6 +15,9 @@
             Icon
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.IconID)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.IconName)
         </th>
         <th>
@@ -30,9 +33,12 @@
     <tr>
         <td>
             <div class="inventory-cell">
-                <div class="@item.IconSheet @item.IconPosition"></div>
+                <div class="inventory-item @item.IconSheet @item.IconPosition"></div>
 
             </div>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IconID)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IconName)

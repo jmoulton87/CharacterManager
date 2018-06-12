@@ -27,6 +27,7 @@ namespace CharacterManager.Models
         [ForeignKey("Icon")]
         public int? IconID { get; set; }
 
+
         public string BaseItemName { get; set; }
 
         public ItemType BaseItemType { get; set; }
@@ -34,6 +35,10 @@ namespace CharacterManager.Models
         public double BaseItemValue { get; set; }
 
         public double BaseItemWeight { get; set; }
+
+
+
+        public bool? IsExtraDim { get; set; }
 
         public double? Capacity { get; set; }
 

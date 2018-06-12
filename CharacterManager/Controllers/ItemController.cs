@@ -15,25 +15,25 @@ namespace CharacterManager.Controllers
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
 
-        public void MoveItem(int pickitemid, int picklocationid, int pickslotid, int? dropitemid, int droplocationid, int dropslotid)
+        public void MoveItem(int FirstItemID, int FirstLocationID, int FirstSlotID, int? SecondItemID, int SecondLocationID, int SecondSlotID)
         {
-            if(dropitemid != null)
+            if(SecondItemID != null)
             {
-                unitOfWork.ItemRepository.GetByID(pickitemid).Slot = dropslotid;
+                unitOfWork.ItemRepository.GetByID(FirstItemID).Slot = SecondSlotID;
                 unitOfWork.Save();
-                unitOfWork.ItemRepository.GetByID(pickitemid).LocationID = droplocationid;
+                unitOfWork.ItemRepository.GetByID(FirstItemID).LocationID = SecondLocationID;
                 unitOfWork.Save();
 
-                unitOfWork.ItemRepository.GetByID(dropitemid).Slot = pickslotid;
+                unitOfWork.ItemRepository.GetByID(SecondItemID).Slot = FirstSlotID;
                 unitOfWork.Save();
-                unitOfWork.ItemRepository.GetByID(dropitemid).LocationID = picklocationid;
+                unitOfWork.ItemRepository.GetByID(SecondItemID).LocationID = FirstLocationID;
                 unitOfWork.Save();
             }
             else
             {
-                unitOfWork.ItemRepository.GetByID(pickitemid).Slot = dropslotid;
+                unitOfWork.ItemRepository.GetByID(FirstItemID).Slot = SecondSlotID;
                 unitOfWork.Save();
-                unitOfWork.ItemRepository.GetByID(pickitemid).LocationID = droplocationid;
+                unitOfWork.ItemRepository.GetByID(FirstItemID).LocationID = SecondLocationID;
                 unitOfWork.Save();
             }
         }

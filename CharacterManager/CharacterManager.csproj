@@ -231,6 +231,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Inventory\inventorycell.png" />
+    <Content Include="Content\Inventory\windows_pieces.png" />
     <Content Include="Content\items.css" />
     <Content Include="Content\IconSheets\items01.png" />
     <Content Include="Content\IconSheets\items02.png" />
