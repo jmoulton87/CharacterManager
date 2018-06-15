@@ -37,6 +37,8 @@ namespace CharacterManager.Models
 
         public double BaseItemWeight { get; set; }
 
+        public int MaxQuantity { get; set; }
+
 
 
         public bool? IsExtraDim { get; set; }

@@ -1323,20 +1323,20 @@ namespace CharacterManager.DAL
 
             var baseItems = new List<BaseItem>
             {
-                new BaseItem{ BaseItemID = 1, IconID =796,  BaseItemName = "Copper Coin", BaseItemType = (ItemType)0, BaseItemValue = 0.01, BaseItemWeight = 0.02},
-                new BaseItem{ BaseItemID = 2, IconID =795, BaseItemName = "Silver Coin", BaseItemType = (ItemType)0, BaseItemValue = 0.1, BaseItemWeight = 0.02},
-                new BaseItem{ BaseItemID = 3, IconID =794, BaseItemName = "Gold Coin", BaseItemType = (ItemType)0, BaseItemValue = 1, BaseItemWeight = 0.02},
-                new BaseItem{ BaseItemID = 4, IconID =793, BaseItemName = "Platinum Coin", BaseItemType = (ItemType)0, BaseItemValue = 10, BaseItemWeight = 0.02},
+                new BaseItem{ BaseItemID = 1, IconID =796,  BaseItemName = "Copper Coin", BaseItemType = (ItemType)0, BaseItemValue = 0.01, BaseItemWeight = 0.02, MaxQuantity = 5000},
+                new BaseItem{ BaseItemID = 2, IconID =795, BaseItemName = "Silver Coin", BaseItemType = (ItemType)0, BaseItemValue = 0.1, BaseItemWeight = 0.02, MaxQuantity = 5000},
+                new BaseItem{ BaseItemID = 3, IconID =794, BaseItemName = "Gold Coin", BaseItemType = (ItemType)0, BaseItemValue = 1, BaseItemWeight = 0.02, MaxQuantity = 5000},
+                new BaseItem{ BaseItemID = 4, IconID =793, BaseItemName = "Platinum Coin", BaseItemType = (ItemType)0, BaseItemValue = 10, BaseItemWeight = 0.02, MaxQuantity = 5000},
 
-                new BaseItem{ BaseItemID = 5, IconID = 1074, BaseItemName = "Backpack", BaseItemType = (ItemType)1, BaseItemValue = 2, BaseItemWeight = 2, IsExtraDim = false },
-                new BaseItem{ BaseItemID = 6, IconID = 1105, BaseItemName = "Handy Haversack", BaseItemType = (ItemType)2, BaseItemValue = 2000, BaseItemWeight = 5, IsExtraDim=true, Capacity = 120},
+                new BaseItem{ BaseItemID = 5, IconID = 1074, BaseItemName = "Backpack", BaseItemType = (ItemType)1, BaseItemValue = 2, BaseItemWeight = 2, IsExtraDim = false, MaxQuantity = 1 },
+                new BaseItem{ BaseItemID = 6, IconID = 1105, BaseItemName = "Handy Haversack", BaseItemType = (ItemType)2, BaseItemValue = 2000, BaseItemWeight = 5, IsExtraDim=true, Capacity = 120, MaxQuantity = 1},
 
-                new BaseItem{ BaseItemID = 7, IconID =415, BaseItemName = "Longsword", BaseItemType = (ItemType)3, BaseItemValue = 15, BaseItemWeight = 4},
-                new BaseItem{ BaseItemID = 11, IconID =1028, BaseItemName = "Greatsword", BaseItemType = (ItemType)4, BaseItemValue = 15, BaseItemWeight = 4},
+                new BaseItem{ BaseItemID = 7, IconID =415, BaseItemName = "Longsword", BaseItemType = (ItemType)3, BaseItemValue = 15, BaseItemWeight = 4, MaxQuantity = 1},
+                new BaseItem{ BaseItemID = 11, IconID =1028, BaseItemName = "Greatsword", BaseItemType = (ItemType)4, BaseItemValue = 15, BaseItemWeight = 4, MaxQuantity = 1},
 
-                new BaseItem{ BaseItemID = 8, IconID =1036, BaseItemName = "Scale Mail", BaseItemType = (ItemType)6, BaseItemValue = 50, BaseItemWeight = 30},
-                new BaseItem{ BaseItemID = 9, IconID =907, BaseItemName = "Heavy Wooden Shield", BaseItemType = (ItemType)7, BaseItemValue = 7, BaseItemWeight = 10},
-                new BaseItem{ BaseItemID = 10, IconID =141, BaseItemName = "Ruby", BaseItemType = (ItemType)8, BaseItemValue = 500, BaseItemWeight = 0},
+                new BaseItem{ BaseItemID = 8, IconID =1036, BaseItemName = "Scale Mail", BaseItemType = (ItemType)6, BaseItemValue = 50, BaseItemWeight = 30, MaxQuantity = 1},
+                new BaseItem{ BaseItemID = 9, IconID =907, BaseItemName = "Heavy Wooden Shield", BaseItemType = (ItemType)7, BaseItemValue = 7, BaseItemWeight = 10, MaxQuantity = 1},
+                new BaseItem{ BaseItemID = 10, IconID =141, BaseItemName = "Ruby", BaseItemType = (ItemType)8, BaseItemValue = 500, BaseItemWeight = 0, MaxQuantity = 20},
 
 
 

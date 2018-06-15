@@ -32,105 +32,28 @@
 
 //    });
 
-//var firstclick = false;
-//var pickelement, pickitemid, picklocationid, pickslotid, dropelement, dropitemid, droplocationid, dropslotid;
-//$(".inventory-table").on("click", ".inventory-cell", function () {
-//    //console.log("clicking a cell");
-//    //is this first click?
-//    if (firstclick === false) {
-//        //if the first click is on an item, initate a move
-//        if ($(this).children().length > 0) {
-//            //get information for the item that was clicked on
-//            pickelement = $(this).children(0);
-//            pickitemid = pickelement.attr("thisitemid");
-//            picklocationid = pickelement.attr("locationid");
-//            pickslotid = pickelement.attr("slotid");
-//            firstclick = true;
-//        } 
-//    } else {
-//        //if the second click is on an item, swap the items
-//        if ($(this).children().length > 0) {
-//            //get information for the item that was clicked on
-//            dropelement = $(this).children(0);
-//            dropitemid = dropelement.attr("thisitemid");
-//            droplocationid = dropelement.attr("locationid");
-//            dropslotid = dropelement.attr("slotid");
-//            if (/*move is legal*/ 0 === 0) {
-//                $.ajax({
-//                    url: "/Item/MoveItem",
-//                    data: {
-//                        pickitemid: pickitemid,
-//                        picklocationid: picklocationid,
-//                        pickslotid: pickslotid,
-//                        dropitemid: dropitemid,
-//                        droplocationid: droplocationid,
-//                        dropslotid: dropslotid
-//                    },
-//                    success: function () {
-//                        pickelement.detach().appendTo($('[cellid=' + dropslotid + '][locationid=' + droplocationid + ']'));
-//                        dropelement.detach().appendTo($('[cellid=' + pickslotid + '][locationid=' + picklocationid + ']'));
-//                    }
-//                });
 
-//            }
-//        //else if the second click on an empty space, move the item
-//        } else {
-//            dropelement = $(this);
-//            dropitemid = null;
-//            droplocationid = dropelement.attr("locationid");
-//            dropslotid = dropelement.attr("cellid");
-//            if (/*move is legal*/ 0 === 0) {
-//                $.ajax({
-//                    url: "/Item/MoveItem",
-//                    data: {
-//                        pickitemid: pickitemid,
-//                        picklocationid: picklocationid,
-//                        pickslotid: pickslotid,
-//                        dropitemid: dropitemid,
-//                        droplocationid: droplocationid,
-//                        dropslotid: dropslotid
-//                    },
-//                    success: function () {
-//                        pickelement.detach().appendTo($('[cellid=' + dropslotid + '][locationid=' + droplocationid + ']'));
-//                    }
-//                });
-//            }
-//        }
-//        //after moving an item or failing a move, reset the firstclick bool
-//        firstclick = false;
-//    }
-//});
-
-//var pickelement, pickitemid, picklocationid, pickslotid;
-//var dropelement, dropitemid, droplocationid, dropslotid;
-
-
-
-
-
+//this function draws out a location table
 function drawTable(targetID, x, y) {
     //for each row
     var TargetTable = $('#' + targetID);
     var CellID = 1;
-    var LocationID = $('#' + targetID).attr('locationid');
+    var LocationID = $('#' + targetID).attr('location-id');
     for (i = 0; i < y; i++) {
         //console.log("for loop through rows: " + i);
         TargetTable.append('<div class="inventory-row"><div>');
         var ThisRow = TargetTable.children().last();
         for (j = 0; j < x; j++) {
             //console.log("for loop through columns: " + j);
-            ThisRow.append('<div class="inventory-cell" cellid="' + CellID + '" locationid="' + LocationID + '" item-type="all"></div>');
+            ThisRow.append('<div class="inventory-cell" cellid="' + CellID + '" location-id="' + LocationID + '" item-type="all"></div>');
             CellID++;
         }
     }
 }
 
-//draw the gril for the equipment location
-$('document').ready(function () {
-});
 
 
-//draw the grid for the inventory location
+//draw the grid for locations
 $('document').ready(function () {
     console.log("document ready, drawing inventory grid");
     drawTable('InventoryGrid', 4, 8);
@@ -138,8 +61,6 @@ $('document').ready(function () {
     $(".inventory-bag").each(function () {
         drawTable($(this).attr('id'), 4, 8);
     });
-
-
 });
 
 //put the items in their place
@@ -147,33 +68,147 @@ $("document").ready(function () {
     $(".inventory-item").each(function () {
         if ($(this).hasClass("itemlock") == false) {
             //console.log("found item");
-            if ($(this).attr('thisitemid') !== null) {
-                var slotid = $(this).attr('slotid');
-                var locationid = $(this).attr('locationid');
-                $(this).detach().appendTo($('[cellid=' + slotid + '][locationid=' + locationid + ']'));
+            if ($(this).attr('item-id') !== null) {
+                var slotid = $(this).attr('slot-id');
+                var locationid = $(this).attr('location-id');
+                $(this).detach().appendTo($('[cellid=' + slotid + '][location-id=' + locationid + ']'));
             }
         }
     });
 });
 
         //pickelement = $(this).parent(),
-        //pickitemid = $(this).attr("thisitemid"),
-        //picklocationid = $(this).attr("locationid"),
-        //pickslotid = $(this).attr("slotid"),
+        //pickitemid = $(this).attr("item-id"),
+        //picklocation-id = $(this).attr("location-id"),
+        //pickslot-id = $(this).attr("slot-id"),
         //dropelement = $(this).parent();
-        //dropitemid = $(this).attr("thisitemid");
-        //droplocationid = $(this).attr("locationid");
-        //dropslotid = $(this).attr("slotid");
+        //dropitemid = $(this).attr("item-id");
+        //droplocation-id = $(this).attr("location-id");
+        //dropslot-id = $(this).attr("slot-id");
 
 
 
 //this function forces icons that are being dragged to appear on top of other icons
 
-$(function () {
+function MoveAttributes(
+    FirstItem,
+    FirstItemID,
+    FirstBaseItemID,
+    FirstLocationID,
+    FirstSlotID,
+    FirstItemType,
+    SecondSlot,
+    SecondItemID,
+    SecondBaseItemID,
+    SecondLocationID,
+    SecondSlotID,
+    SecondSlotType) {
 
+    this.FirstItem = FirstItem;
+    this.FirstItemID = FirstItemID;
+    this.FirstBaseItemID = FirstBaseItemID;
+    this.FirstLocationID = FirstLocationID;
+    this.FirstSlotID = FirstSlotID;
+    this.FirstItemType = FirstItemType;
+
+    this.SecondSlot = SecondSlot;
+    this.SecondItemID = SecondItemID;
+    this.SecondBaseItemID = SecondBaseItemID;
+    this.SecondLocationID = SecondLocationID;
+    this.SecondSlotID = SecondSlotID;
+    this.SecondSlotType = SecondSlotType;
+
+};
+
+
+function legalMoveCheck(
+    FirstItem,
+    FirstItemID,
+    FirstBaseItemID,
+    FirstLocationID,
+    FirstSlotID,
+    FirstItemType,
+    SecondSlot,
+    SecondItemID,
+    SecondBaseItemID,
+    SecondLocationID,
+    SecondSlotID,
+    SecondSlotType) {
+    var legalMove = true;
+
+    if (FirstItemID == SecondItemID) {
+        console.log("item is being moved into its own slot");
+        legalMove = false;
+    }
+
+    if (!(SecondSlotType.indexOf(FirstItemType) >= 0 || SecondSlotType == "all")) {
+        console.log("item is being moved into a slot with invalid type");
+        legalMove = false;
+    }
+
+    if ($('[item-type="onehandedweapon twohandedweapon rangedweapon"]').children(0).attr("item-type") == "twohandedweapon" && SecondSlotType == "onehandedweapon shield ammo") {
+        console.log("an item is being moved into the secondary slot with a twohandedweapon equipped in the primary slot");
+        legalMove = false;
+    }
+
+    if ($('[item-type="onehandedweapon shield ammo"]').children().length > 0 && FirstItemType == "twohandedweapon") {
+        console.log("a twohandedweapon is being moved into the primary slot while there is an item equipped in the secondary slot");
+        legalMove = false;
+    }
+
+    return legalMove;
+};
+
+function moveQuantity(
+    FirstItem,
+    FirstItemID,
+    FirstBaseItemID,
+    FirstItemQuan,
+    FirstItemMaxQ,
+    FirstLocationID,
+    FirstSlotID,
+    FirstItemType,
+    SecondSlot,
+    SecondItemID,
+    SecondBaseItemID,
+    SecondItemQuan,
+    SecondItemMaxQ,
+    SecondLocationID,
+    SecondSlotID,
+    SecondSlotType) {
+
+    //the items are the same type and the item is stackable
+    if (FirstBaseItemID == SecondBaseItemID && FirstItemMaxQ > 1) {
+        //if the combined quantity would result in two stacks
+        if (FirstItemQuan + SecondItemQuan > FirstItemMaxQ) {
+            var FirstStack = FirstItemMaxQ;
+            var SecondStack = (FirstItemQuan + SecondItemQuan) - FirstItemMaxQ;
+
+
+
+        }
+
+        //if the conbined quantity would result in one stack
+        else if (FirstItemQuan + SecondItemQuan <= FirstItemMaxQ) {
+            var CombinedQuan = FirstItemQuan + SecondItemQuan;
+
+
+
+        }
+    }
+
+
+
+
+
+    return null;
+
+};
+
+$(function() {
     //declare variables
-    var FirstItem, FirstItemID, FirstLocationID, FirstSlotID;
-    var CellElement, SecondItemID, SecondLocationID, SecondSlotID;
+    var FirstItem, FirstItemID, FirstBaseItemID, FirstItemQuan, FirstItemMaxQ, FirstLocationID, FirstSlotID, FirstItemType;
+    var SecondSlot, SecondItemID, SecondBaseItemID, SecondItemQuan, SecondItemMaxQ, SecondLocationID, SecondSlotID, SecondSlotType;
 
     //this function resets the position of a element that has been dragged
     function resetPosition(element) {
@@ -182,6 +217,7 @@ $(function () {
         element.css('top', '');
     }
 
+
     //this makes some elements draggable
     $(".inventory-item:not(.itemlock)").draggable({
         revert: "invalid",
@@ -189,10 +225,17 @@ $(function () {
         cursorAt: { top: 20, left: 20 },
         start: function (event, ui) {
             FirstItem = $(this);
-            FirstItemID = FirstItem.attr("thisitemid");
-            FirstLocationID = FirstItem.attr("locationid");
-            FirstSlotID = FirstItem.attr("slotid");
+
+            FirstItemID = FirstItem.attr("item-id");
+            FirstBaseItemID = FirstItem.attr("baseitem-id");
+
+            FirstItemQuan = FirstItem.children(0).attr("item-quantity");
+            FirstItemMaxQ = FirstItem.attr("max-quantity");
+
+            FirstLocationID = FirstItem.attr("location-id");
+            FirstSlotID = FirstItem.attr("slot-id");
             FirstItemType = FirstItem.attr("item-type");
+
             FirstItem.css('z-index', 9999);
         }
     });
@@ -201,14 +244,20 @@ $(function () {
     $(".inventory-cell:not(.itemlock)").droppable({
         accept: ".inventory-item",
         drop: function (event, ui) {
-            DestinationCell = $(this);
+            SecondSlot = $(this);
 
-            SecondItem = DestinationCell.children(0);
-            SecondItemID = SecondItem.attr("thisitemid");
+            SecondItem = SecondSlot.children(0);
 
-            SecondLocationID = DestinationCell.attr("locationid");
-            SecondSlotID = DestinationCell.attr("cellid");
-            SecondSlotType = DestinationCell.attr("item-type");
+            SecondItemID = SecondItem.attr("item-id");
+            SecondBaseItemID = SecondItem.attr("baseitem-id");
+
+            SecondItemQuan = SecondItem.children(0).attr("item-quantity");
+            SecondItemMaxQ = SecondItem.attr("max-quantity");
+
+            SecondLocationID = SecondSlot.attr("location-id");
+            SecondSlotID = SecondSlot.attr("cellid");
+            SecondSlotType = SecondSlot.attr("item-type");
+
             //DEBUGGING CONSOLE LOGS
             //console.log("picked up: ", FirstItem);
             //console.log("first item id: " + FirstItemID);
@@ -219,13 +268,23 @@ $(function () {
             //console.log("destination location: " + SecondLocationID);
             //console.log("destination cell: " + SecondSlotID);
 
-            //if the item is not moving into its own cell 
-            //and the item is not moving into a cell of invalid type
-            //and the item is not moving into the secondary slot with a twohandedweapon already equipped
-            //move the item
-            if ([FirstSlotID, SecondSlotID] != [FirstLocationID, SecondLocationID]
-                && (SecondSlotType.indexOf(FirstItemType) >= 0 || SecondSlotType == "all")
-                && !($('[item-type="onehandedweapon twohandedweapon rangedweapon"]').children(0).attr("item-type") == "twohandedweapon" && SecondSlotType == "onehandedweapon rangedweapon shield ammo")) {
+            if (legalMoveCheck(
+                FirstItem,
+                FirstItemID,
+                FirstBaseItemID,
+                FirstItemQuan,
+                FirstItemMaxQ,
+                FirstLocationID,
+                FirstSlotID,
+                FirstItemType,
+                SecondSlot,
+                SecondItemID,
+                SecondBaseItemID,
+                SecondItemQuan,
+                SecondItemMaxQ,
+                SecondLocationID,
+                SecondSlotID,
+                SecondSlotType) == true) {
                 $.ajax({
                     url: "/Item/MoveItem",
                     data: {
@@ -241,30 +300,30 @@ $(function () {
                         if (SecondItemID != null) {
                             FirstItem
                                 .detach()
-                                .appendTo($('[cellid=' + SecondSlotID + '][locationid=' + SecondLocationID + ']'));
+                                .appendTo($('[cellid=' + SecondSlotID + '][location-id=' + SecondLocationID + ']'));
                             FirstItem
                                 .attr({
-                                    locationid: SecondLocationID,
-                                    slotid: SecondSlotID
+                                    "location-id": SecondLocationID,
+                                    "slot-id": SecondSlotID
                                 });
                             resetPosition(FirstItem);
 
                             SecondItem
                                 .detach()
-                                .appendTo($('[cellid=' + FirstSlotID + '][locationid=' + FirstLocationID + ']'));
+                                .appendTo($('[cellid=' + FirstSlotID + '][location-id=' + FirstLocationID + ']'));
                             SecondItem.attr({
-                                locationid: FirstLocationID,
-                                slotid: FirstSlotID
+                                "location-id": FirstLocationID,
+                                "slot-id": FirstSlotID
                             });
                         //if the item is moving into an empty cell, move the item
                         } else {
                             FirstItem
                                 .detach()
-                                .appendTo($('[cellid=' + SecondSlotID + '][locationid=' + SecondLocationID + ']'));
+                                .appendTo($('[cellid=' + SecondSlotID + '][location-id=' + SecondLocationID + ']'));
                             FirstItem
                                 .attr({
-                                    locationid: SecondLocationID,
-                                    slotid: SecondSlotID
+                                    "location-id": SecondLocationID,
+                                    "slot-id": SecondSlotID
                                 });
                             resetPosition(FirstItem);
                         }

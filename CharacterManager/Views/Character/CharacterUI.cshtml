@@ -13,7 +13,7 @@
 
     var inventoryID = Model.Inventories.First().InventoryID;
     var locations = unitOfWork.LocationRepository.Get().Where(x => x.InventoryID == inventoryID);
-    var equipment = locations.Where(x => x.LocationType == (LocationType)0).First();
+    var equipment = locations.Where(x => x.LocationType == (LocationType)0).FirstOrDefault();
     var inventory = locations.Where(x => x.LocationType == (LocationType)1).First();
     var bags = locations.Where(x => x.LocationType == (LocationType)2);
 
@@ -31,65 +31,64 @@
     <div class="row">
         <div class="inventory-container pull-left">
 
-            <div id="EquipmentGrid" class="inventory-table" locationid="@equipment.LocationID">
+            <div id="EquipmentGrid" class="inventory-table" location-id="@equipment.LocationID">
                 <div class="inventory-row">
                     <div class="inventory-name">
                         Equipment
                     </div>
                 </div>
                 <div class="inventory-row">
-                    <div class="inventory-cell" cellid="1" locationid="@equipment.LocationID" item-type="head"></div>
+                    <div class="inventory-cell" cellid="1" location-id="@equipment.LocationID" item-type="head"></div>
                     <div class="equipment-label1">Head</div>
                     <div class="equipment-label2">Belt</div>
-                    <div class="inventory-cell" cellid="9" locationid="@equipment.LocationID" item-type="belt"></div>
+                    <div class="inventory-cell" cellid="9" location-id="@equipment.LocationID" item-type="belt"></div>
                 </div>
                 <div class="inventory-row">
-                    <div class="inventory-cell" cellid="2" locationid="@equipment.LocationID" item-type="headband"></div>
+                    <div class="inventory-cell" cellid="2" location-id="@equipment.LocationID" item-type="headband"></div>
                     <div class="equipment-label1">Headband</div>
                     <div class="equipment-label2">Wrists</div>
-                    <div class="inventory-cell" cellid="10" locationid="@equipment.LocationID" item-type="wrists"></div>
+                    <div class="inventory-cell" cellid="10" location-id="@equipment.LocationID" item-type="wrists"></div>
                 </div>
                 <div class="inventory-row">
-                    <div class="inventory-cell" cellid="3" locationid="@equipment.LocationID" item-type="eyes"></div>
+                    <div class="inventory-cell" cellid="3" location-id="@equipment.LocationID" item-type="eyes"></div>
                     <div class="equipment-label1">Eyes</div>
                     <div class="equipment-label2">Hands</div>
-                    <div class="inventory-cell" cellid="11" locationid="@equipment.LocationID" item-type="hands"></div>
+                    <div class="inventory-cell" cellid="11" location-id="@equipment.LocationID" item-type="hands"></div>
                 </div>
                 <div class="inventory-row">
-                    <div class="inventory-cell" cellid="4" locationid="@equipment.LocationID" item-type="shoulders"></div>
+                    <div class="inventory-cell" cellid="4" location-id="@equipment.LocationID" item-type="shoulders"></div>
                     <div class="equipment-label1">Shoulders</div>
                     <div class="equipment-label2">Ring</div>
-                    <div class="inventory-cell" cellid="12" locationid="@equipment.LocationID" item-type="ring"></div>
+                    <div class="inventory-cell" cellid="12" location-id="@equipment.LocationID" item-type="ring"></div>
                 </div>
                 <div class="inventory-row">
-                    <div class="inventory-cell" cellid="5" locationid="@equipment.LocationID" item-type="neck"></div>
+                    <div class="inventory-cell" cellid="5" location-id="@equipment.LocationID" item-type="neck"></div>
                     <div class="equipment-label1">Neck</div>
                     <div class="equipment-label2">Ring</div>
-                    <div class="inventory-cell" cellid="13" locationid="@equipment.LocationID" item-type="ring"></div>
+                    <div class="inventory-cell" cellid="13" location-id="@equipment.LocationID" item-type="ring"></div>
                 </div>
                 <div class="inventory-row">
-                    <div class="inventory-cell" cellid="6" locationid="@equipment.LocationID" item-type="chest"></div>
+                    <div class="inventory-cell" cellid="6" location-id="@equipment.LocationID" item-type="chest"></div>
                     <div class="equipment-label1">Chest</div>
                 </div>
                 <div class="inventory-row">
-                    <div class="inventory-cell" cellid="7" locationid="@equipment.LocationID" item-type="body"></div>
+                    <div class="inventory-cell" cellid="7" location-id="@equipment.LocationID" item-type="body"></div>
                     <div class="equipment-label1">Body</div>
                     <div class="equipment-label2">Primary</div>
-                    <div class="inventory-cell" cellid="14" locationid="@equipment.LocationID" item-type="onehandedweapon twohandedweapon rangedweapon"></div>
+                    <div class="inventory-cell" cellid="14" location-id="@equipment.LocationID" item-type="onehandedweapon twohandedweapon rangedweapon"></div>
                 </div>
                 <div class="inventory-row">
-                    <div class="inventory-cell" cellid="8" locationid="@equipment.LocationID" item-type="armor"></div>
+                    <div class="inventory-cell" cellid="8" location-id="@equipment.LocationID" item-type="armor"></div>
                     <div class="equipment-label1">Armor</div>
                     <div class="equipment-label2">Secondary</div>
-                    <div class="inventory-cell" cellid="15" locationid="@equipment.LocationID" item-type="onehandedweapon rangedweapon shield ammo"></div>
+                    <div class="inventory-cell" cellid="15" location-id="@equipment.LocationID" item-type="onehandedweapon shield ammo"></div>
                 </div>
             </div>
 
         </div>
-
         <div class="inventory-container pull-left">
 
-            <div id="InventoryGrid" class="inventory-table" locationid="@inventory.LocationID">
+            <div id="InventoryGrid" class="inventory-table" location-id="@inventory.LocationID">
                 <div class="inventory-row">
                     <div class="inventory-name">
                         Inventory
@@ -111,7 +110,7 @@
 
 
 
-            <div id="bag-location_@bag.LocationID" class="inventory-table inventory-bag" locationid="@bag.LocationID">
+            <div id="bag-location_@bag.LocationID" class="inventory-table inventory-bag" location-id="@bag.LocationID">
                 <div class="inventory-row">
                     <div class="inventory-cell itemlock" item-type="all">
                         <div class="inventory-item @unitOfWork.ItemRepository.GetByID(bag.ItemID).BaseItem.Icon.IconSheet @unitOfWork.ItemRepository.GetByID(bag.ItemID).BaseItem.Icon.IconPosition itemlock" ></div>
@@ -138,7 +137,7 @@
 <div id="itemSpawn" class="hidden">
     @foreach (var item in items)
     {
-    <div class="inventory-item @item.BaseItem.Icon.IconSheet @item.BaseItem.Icon.IconPosition" thisitemid="@item.ItemID" slotid="@item.Slot" locationid="@item.LocationID" item-type=@item.BaseItem.BaseItemType>
+    <div class="inventory-item @item.BaseItem.Icon.IconSheet @item.BaseItem.Icon.IconPosition" item-id="@item.ItemID" baseitem-id="@item.BaseItemID" slot-id="@item.Slot" location-id="@item.LocationID" item-type=@item.BaseItem.BaseItemType max-quantity="@item.BaseItem.MaxQuantity">
         @if (item.Quantity > 1)
         {
             <b class="item-quantity">@item.Quantity</b>

@@ -38,6 +38,25 @@ namespace CharacterManager.Controllers
             }
         }
 
+        public void EditQuantities(int FirstItemID, int FirstItemNewQuan, int SecondItemID, int SecondItemNewQuan, int MaxQuan)
+        {
+
+            if (FirstItemNewQuan == 0)
+            {
+                unitOfWork.ItemRepository.Delete(FirstItemID);
+                unitOfWork.Save();
+                unitOfWork.ItemRepository.GetByID(SecondItemID).Quantity = SecondItemNewQuan; 
+                unitOfWork.Save();
+            }
+            else
+            {
+                unitOfWork.ItemRepository.GetByID(FirstItemID).Quantity = FirstItemNewQuan;
+                unitOfWork.Save();
+                unitOfWork.ItemRepository.GetByID(SecondItemID).Quantity = SecondItemNewQuan;
+                unitOfWork.Save();
+            }
+        }
+
         //public void TradeItem(int ItemID, int LocationID)
         //{
         //    var destination = unitOfWork.LocationRepository.GetByID(LocationID);
