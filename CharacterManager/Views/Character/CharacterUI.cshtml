@@ -140,7 +140,7 @@
     <div class="inventory-item @item.BaseItem.Icon.IconSheet @item.BaseItem.Icon.IconPosition" item-id="@item.ItemID" baseitem-id="@item.BaseItemID" slot-id="@item.Slot" location-id="@item.LocationID" item-type=@item.BaseItem.BaseItemType max-quantity="@item.BaseItem.MaxQuantity">
         @if (item.Quantity > 1)
         {
-            <b class="item-quantity">@item.Quantity</b>
+            <div class="item-quantity">@item.Quantity</div>
         }
     </div>
     }

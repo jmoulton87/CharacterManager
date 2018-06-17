@@ -1,4 +1,27 @@
-﻿//$("#trade").on('click', function () {
+﻿    //DEBUGGING CONSOLE LOGS
+    //console.log("FirstItem: ", FirstItem);
+    //console.log("FirstItemID: " + FirstItemID);
+    //console.log("FirstBaseItemID: " + FirstBaseItemID);
+    //console.log("FirstItemQuan: " + FirstItemQuan);
+    //console.log("FirstItemMaxQ: " + FirstItemMaxQ);
+    //console.log("FirstLocationID: " + FirstLocationID);
+    //console.log("FirstSlotID: " + FirstSlotID);
+    //console.log("FirstItemType: " + FirstItemType);
+
+    //console.log("SecondSlot: ", SecondSlot);
+    //console.log("SecondItem: " + SecondItem);
+    //console.log("SecondItemID: " + SecondItemID);
+    //console.log("SecondBaseItemID: " + SecondBaseItemID);
+    //console.log("SecondItemQuan: " + SecondItemQuan);
+    //console.log("SecondItemMaxQ: " + SecondItemMaxQ);
+    //console.log("SecondLocationID: " + SecondLocationID);
+    //console.log("SecondSlotID: " + SecondSlotID);
+    //console.log("SecondSlotType: " + SecondSlotType);
+
+
+
+
+//$("#trade").on('click', function () {
 //    var destination = $("#tradeSelect option:selected").val();
 //    console.log("destination: " + destination);
 //    $(".tradeCell").each(function () {
@@ -77,60 +100,23 @@ $("document").ready(function () {
     });
 });
 
-        //pickelement = $(this).parent(),
-        //pickitemid = $(this).attr("item-id"),
-        //picklocation-id = $(this).attr("location-id"),
-        //pickslot-id = $(this).attr("slot-id"),
-        //dropelement = $(this).parent();
-        //dropitemid = $(this).attr("item-id");
-        //droplocation-id = $(this).attr("location-id");
-        //dropslot-id = $(this).attr("slot-id");
 
 
-
-//this function forces icons that are being dragged to appear on top of other icons
-
-function MoveAttributes(
-    FirstItem,
-    FirstItemID,
-    FirstBaseItemID,
-    FirstLocationID,
-    FirstSlotID,
-    FirstItemType,
-    SecondSlot,
-    SecondItemID,
-    SecondBaseItemID,
-    SecondLocationID,
-    SecondSlotID,
-    SecondSlotType) {
-
-    this.FirstItem = FirstItem;
-    this.FirstItemID = FirstItemID;
-    this.FirstBaseItemID = FirstBaseItemID;
-    this.FirstLocationID = FirstLocationID;
-    this.FirstSlotID = FirstSlotID;
-    this.FirstItemType = FirstItemType;
-
-    this.SecondSlot = SecondSlot;
-    this.SecondItemID = SecondItemID;
-    this.SecondBaseItemID = SecondBaseItemID;
-    this.SecondLocationID = SecondLocationID;
-    this.SecondSlotID = SecondSlotID;
-    this.SecondSlotType = SecondSlotType;
-
-};
-
-
+//this function checks if the move an item is making is legal
 function legalMoveCheck(
     FirstItem,
     FirstItemID,
     FirstBaseItemID,
+    FirstItemQuan,
+    FirstItemMaxQ,
     FirstLocationID,
     FirstSlotID,
     FirstItemType,
     SecondSlot,
     SecondItemID,
     SecondBaseItemID,
+    SecondItemQuan,
+    SecondItemMaxQ,
     SecondLocationID,
     SecondSlotID,
     SecondSlotType) {
@@ -146,12 +132,14 @@ function legalMoveCheck(
         legalMove = false;
     }
 
+    //if there is a two handed weapon in the primary slot AND the item is being moved into the secondary slot
     if ($('[item-type="onehandedweapon twohandedweapon rangedweapon"]').children(0).attr("item-type") == "twohandedweapon" && SecondSlotType == "onehandedweapon shield ammo") {
         console.log("an item is being moved into the secondary slot with a twohandedweapon equipped in the primary slot");
         legalMove = false;
     }
 
-    if ($('[item-type="onehandedweapon shield ammo"]').children().length > 0 && FirstItemType == "twohandedweapon") {
+    //if there is an item in the secondary slot AND the item being moved is a twohanded weapon AND the target slot is the primary slot
+    if ($('[item-type="onehandedweapon shield ammo"]').children().length > 0 && FirstItemType == "twohandedweapon" && SecondSlotType == "onehandedweapon twohandedweapon rangedweapon") {
         console.log("a twohandedweapon is being moved into the primary slot while there is an item equipped in the secondary slot");
         legalMove = false;
     }
@@ -176,37 +164,78 @@ function moveQuantity(
     SecondLocationID,
     SecondSlotID,
     SecondSlotType) {
-
-    //the items are the same type and the item is stackable
-    if (FirstBaseItemID == SecondBaseItemID && FirstItemMaxQ > 1) {
-        //if the combined quantity would result in two stacks
-        if (FirstItemQuan + SecondItemQuan > FirstItemMaxQ) {
-            var FirstStack = FirstItemMaxQ;
-            var SecondStack = (FirstItemQuan + SecondItemQuan) - FirstItemMaxQ;
+    console.log("doing a thing");
 
 
 
-        }
+    var FirstStack, SecondStack;
 
-        //if the conbined quantity would result in one stack
-        else if (FirstItemQuan + SecondItemQuan <= FirstItemMaxQ) {
-            var CombinedQuan = FirstItemQuan + SecondItemQuan;
+    //if the combined quantity would result in two stacks
+    if ((FirstItemQuan + SecondItemQuan) > FirstItemMaxQ) {
+        console.log("thing1");
+        FirstStack = (FirstItemQuan + SecondItemQuan) - FirstItemMaxQ;
+        SecondStack = FirstItemMaxQ;
 
+        $.ajax({
+            url: "/Item/EditQuantities",
+            data: {
+                FirstItemID: FirstItemID,
+                FirstItemNewQuan: FirstStack,
+                SecondItemID: SecondItemID,
+                SecondItemNewQuan: SecondStack
+            },
+            success: function () {
+                //update the item quantities of the two items
+                FirstItem.children(0).text(FirstStack);
+                SecondItem.children(0).text(SecondStack);
+            }
+        });
 
-
-        }
     }
 
+    //if the conbined quantity would result in one stack
+    else if ((FirstItemQuan + SecondItemQuan) <= FirstItemMaxQ) {
+        FirstStack = 0
+        SecondStack = FirstItemQuan + SecondItemQuan;
 
-
-
-
-    return null;
-
+        $.ajax({
+            url: "/Item/EditQuantities",
+            data: {
+                FirstItemID: FirstItemID,
+                FirstItemNewQuan: FirstStack,
+                SecondItemID: SecondItemID,
+                SecondItemNewQuan: SecondStack
+            },
+            success: function () {
+                //delete the first item and update the quantity of the second item
+                FirstItem.detach();
+                SecondItem.children(0).text(SecondStack);
+            }
+        });
+    }
 };
 
 $(function() {
     //declare variables
+
+    //FirstItem         0
+    //FirstItemID       1
+    //FirstBaseItemID   2
+    //FirstItemQuan     3
+    //FirstItemMaxQ     4
+    //FirstLocationID   5
+    //FirstSlotID       6
+    //FirstItemType     7
+    //SecondSlot        8
+    //SecondItemID      9
+    //SecondBaseItemID  10
+    //SecondItemQuan    11
+    //SecondItemMaxQ    12
+    //SecondLocationID  13
+    //SecondSlotID      14
+    //SecondSlotType    15
+
+    var ItemVars = [];
     var FirstItem, FirstItemID, FirstBaseItemID, FirstItemQuan, FirstItemMaxQ, FirstLocationID, FirstSlotID, FirstItemType;
     var SecondSlot, SecondItemID, SecondBaseItemID, SecondItemQuan, SecondItemMaxQ, SecondLocationID, SecondSlotID, SecondSlotType;
 
@@ -229,8 +258,8 @@ $(function() {
             FirstItemID = FirstItem.attr("item-id");
             FirstBaseItemID = FirstItem.attr("baseitem-id");
 
-            FirstItemQuan = FirstItem.children(0).attr("item-quantity");
-            FirstItemMaxQ = FirstItem.attr("max-quantity");
+            FirstItemQuan = parseInt(FirstItem.children(0).text());
+            FirstItemMaxQ = parseInt(FirstItem.attr("max-quantity"));
 
             FirstLocationID = FirstItem.attr("location-id");
             FirstSlotID = FirstItem.attr("slot-id");
@@ -251,24 +280,40 @@ $(function() {
             SecondItemID = SecondItem.attr("item-id");
             SecondBaseItemID = SecondItem.attr("baseitem-id");
 
-            SecondItemQuan = SecondItem.children(0).attr("item-quantity");
-            SecondItemMaxQ = SecondItem.attr("max-quantity");
+            SecondItemQuan = parseInt(SecondItem.children(0).text());
+            SecondItemMaxQ = parseInt(SecondItem.attr("max-quantity"));
 
             SecondLocationID = SecondSlot.attr("location-id");
             SecondSlotID = SecondSlot.attr("cellid");
             SecondSlotType = SecondSlot.attr("item-type");
 
-            //DEBUGGING CONSOLE LOGS
-            //console.log("picked up: ", FirstItem);
-            //console.log("first item id: " + FirstItemID);
-            //console.log("first item location: " + FirstLocationID);
-            //console.log("first item location: " + FirstSlotID);
-            //console.log("dropped: ", DestinationCell);
-            //console.log("second item id: " + SecondItemID);
-            //console.log("destination location: " + SecondLocationID);
-            //console.log("destination cell: " + SecondSlotID);
 
-            if (legalMoveCheck(
+
+
+            if (FirstBaseItemID == SecondBaseItemID && FirstItemMaxQ > 1) {
+                console.log("doing item quantity move thing");
+
+                moveQuantity(
+                    FirstItem,
+                    FirstItemID,
+                    FirstBaseItemID,
+                    FirstItemQuan,
+                    FirstItemMaxQ,
+                    FirstLocationID,
+                    FirstSlotID,
+                    FirstItemType,
+                    SecondSlot,
+                    SecondItemID,
+                    SecondBaseItemID,
+                    SecondItemQuan,
+                    SecondItemMaxQ,
+                    SecondLocationID,
+                    SecondSlotID,
+                    SecondSlotType);
+                resetPosition(FirstItem);
+            }
+
+            else if (legalMoveCheck(
                 FirstItem,
                 FirstItemID,
                 FirstBaseItemID,
@@ -285,6 +330,10 @@ $(function() {
                 SecondLocationID,
                 SecondSlotID,
                 SecondSlotType) == true) {
+
+
+
+
                 $.ajax({
                     url: "/Item/MoveItem",
                     data: {
@@ -329,6 +378,8 @@ $(function() {
                         }
                     }
                 });
+
+
             //if the item has made an invalid move, reset position without AJAX call
             } else {
                 resetPosition(FirstItem);

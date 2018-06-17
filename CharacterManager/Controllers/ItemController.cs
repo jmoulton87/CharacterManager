@@ -38,7 +38,7 @@ namespace CharacterManager.Controllers
             }
         }
 
-        public void EditQuantities(int FirstItemID, int FirstItemNewQuan, int SecondItemID, int SecondItemNewQuan, int MaxQuan)
+        public void EditQuantities(int FirstItemID, int FirstItemNewQuan, int SecondItemID, int SecondItemNewQuan)
         {
 
             if (FirstItemNewQuan == 0)

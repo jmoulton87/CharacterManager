@@ -1353,10 +1353,10 @@ namespace CharacterManager.DAL
                 new Item{ ItemID = 3, BaseItemID = 3, LocationID = 6, ItemName = "Gold Coin(s)", Quantity = 100, ItemValue = 1, Slot=3},
                 new Item{ ItemID = 4, BaseItemID = 4, LocationID = 6, ItemName = "Platinum Coin(s)", Quantity = 100, ItemValue = 100, Slot=4},
 
-                new Item{ ItemID = 5, BaseItemID = 1, LocationID = 3, ItemName = "Copper Coin(s)", Quantity = 100, ItemValue = 0.01, Slot=5},
-                new Item{ ItemID = 6, BaseItemID = 2, LocationID = 3, ItemName = "Silver Coin(s)", Quantity = 75, ItemValue = 0.1, Slot=6},
-                new Item{ ItemID = 7, BaseItemID = 3, LocationID = 3, ItemName = "Gold Coin(s)", Quantity = 50, ItemValue = 1, Slot=7},
-                new Item{ ItemID = 8, BaseItemID = 4, LocationID = 3, ItemName = "Platinum Coin(s)", Quantity = 25, ItemValue = 100, Slot=8},
+                new Item{ ItemID = 5, BaseItemID = 1, LocationID = 6, ItemName = "Copper Coin(s)", Quantity = 100, ItemValue = 0.01, Slot=5},
+                new Item{ ItemID = 6, BaseItemID = 2, LocationID = 6, ItemName = "Silver Coin(s)", Quantity = 75, ItemValue = 0.1, Slot=6},
+                new Item{ ItemID = 7, BaseItemID = 3, LocationID = 6, ItemName = "Gold Coin(s)", Quantity = 50, ItemValue = 1, Slot=7},
+                new Item{ ItemID = 8, BaseItemID = 4, LocationID = 6, ItemName = "Platinum Coin(s)", Quantity = 25, ItemValue = 100, Slot=8},
 
 
                 new Item{ ItemID = 9, BaseItemID = 5, LocationID = 6, ItemName = "Backpack", Quantity = 1, ItemValue = 2, Slot=9},
