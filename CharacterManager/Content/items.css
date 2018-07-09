@@ -1,4 +1,12 @@
-﻿.inventory-container {
+﻿.quantity-picker-container {
+    position: absolute;
+    border-style: outset;
+    border-color: gray;
+    background-color: #202022;
+    z-index: 9999;
+}
+
+.inventory-container {
     border-style: outset;
     border-color: gray;
     background-color: #202022;
@@ -6,7 +14,7 @@
     margin: 10px;
 }
 
-.inventory-table{
+.inventory-table {
     padding: 10px
 }
 

@@ -15,9 +15,10 @@ namespace CharacterManager.Controllers
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
 
+        //this function switches two items or moves a singular item
         public void MoveItem(int FirstItemID, int FirstLocationID, int FirstSlotID, int? SecondItemID, int SecondLocationID, int SecondSlotID)
         {
-            if(SecondItemID != null)
+            if (SecondItemID != null)
             {
                 unitOfWork.ItemRepository.GetByID(FirstItemID).Slot = SecondSlotID;
                 unitOfWork.Save();
@@ -38,14 +39,16 @@ namespace CharacterManager.Controllers
             }
         }
 
+
+
+        //this function edits the quantities of items when moving stackable items
         public void EditQuantities(int FirstItemID, int FirstItemNewQuan, int SecondItemID, int SecondItemNewQuan)
         {
-
             if (FirstItemNewQuan == 0)
             {
                 unitOfWork.ItemRepository.Delete(FirstItemID);
                 unitOfWork.Save();
-                unitOfWork.ItemRepository.GetByID(SecondItemID).Quantity = SecondItemNewQuan; 
+                unitOfWork.ItemRepository.GetByID(SecondItemID).Quantity = SecondItemNewQuan;
                 unitOfWork.Save();
             }
             else
@@ -55,6 +58,57 @@ namespace CharacterManager.Controllers
                 unitOfWork.ItemRepository.GetByID(SecondItemID).Quantity = SecondItemNewQuan;
                 unitOfWork.Save();
             }
+        }
+
+
+
+        public String SplitQuantity(int ItemID, int SplitQuan)
+        {
+            var item = unitOfWork.ItemRepository.GetByID(ItemID);
+
+            item.Quantity = (item.Quantity - SplitQuan);
+            unitOfWork.Save();
+
+            var newItem = new Item
+            {
+                BaseItemID = item.BaseItemID,
+                LocationID = item.LocationID,
+                ItemName = item.ItemName,
+                Quantity = SplitQuan,
+                ItemValue = item.ItemValue,
+                Slot = FindNextFreeSlot(item.ItemID, item.LocationID, item.Slot)
+            };
+
+            unitOfWork.ItemRepository.Insert(newItem);
+            unitOfWork.Save();
+
+            var returnString = "{ \"NewItemID\":\"" + newItem.ItemID.ToString() + "\", \"NewItemSlot\":\"" + newItem.Slot.ToString() + "\", \"NewItemQuan\":\"" + newItem.Quantity + "\", \"FirstItemQuan\":\"" + item.Quantity + "\" }";
+            return returnString;
+        }
+
+
+
+        //this function finds the next free slot in a location
+        public int FindNextFreeSlot(int ItemID, int LocationID, int SlotID)
+        {
+            var items = unitOfWork.ItemRepository.Get().Where(x => x.LocationID == LocationID);
+
+            //this is where the item is
+            var TheSlot = SlotID;
+            //here is an exit conditon for while loop
+            var NextSlotFound = false;
+            while (NextSlotFound == false)
+            {
+                //go to next slot
+                TheSlot++;
+                //is the next slot empty?
+                if (items.Where(x => x.Slot == TheSlot).Count() == 0)
+                {
+                    //the slot is empty, use this slot
+                    NextSlotFound = true;
+                }
+            }
+            return TheSlot;
         }
 
         //public void TradeItem(int ItemID, int LocationID)
